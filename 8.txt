@@ -1,0 +1,191 @@
+So once again, we're looking at one of these flex demonstration units, but this time I've changed
+
+something. I've made it so that every item has multiple words inside. And at first, this doesn't
+
+really seem to have any bearing, right? It doesn't have any consequence. The items are still aligned
+
+so that they're at the start of the primary axis and they're stretched across the cross axis.
+
+But check out what happens as I start to shrink this container. Once you hit a point where there
+
+isn't any more free space, they all start to shrink. And they all start to shrink kind of
+
+proportionally to a point, right? You hit this moment and now it starts to overflow and it'll
+
+keep overflowing as I get smaller and smaller. But why? Why is it doing this? Why did it choose
+
+that exact moment? Well, it has to do with the fact that with Flexbox, there's this idea of a
+
+minimum size. And by default, it's equivalent to if you had set width min content, right? The idea
+
+is that in each of these columns, there is a minimum size based on the longest word.
+
+So when this one contains, it's the longest word, I should also say all of these elements have
+
+padding. So if I remove the padding, you'll see that it really is like, it stops stretching when
+
+there really is no more space to hide, right? Like the, it doesn't want the content to overflow.
+
+So if it was to get any smaller, this exclamation point would be hanging out inside this other
+
+child, doesn't want to do that. So I think it's really important. And this is like foundational
+
+to Flexbox to understand that there are two sizes that come into play when controlling the
+
+distribution of space. There's this minimum size, the lowest, the smallest it can get before things
+
+don't fit anymore, right? It would overflow the contents. But then there's this other size
+
+and it's, you can think of it as like the default size. The Flexbox specification calls this the
+
+hypothetical size, which I kind of love. It's the idea that like this is the size that it would be
+
+if it's not being acted upon by any other forces. And I'm going to put my padding back just to
+
+think it feels nicer. So let's start by, what do you suppose happens if we give one of these items
+
+a width? So let's pick this item over here. It has a hypothetical size of 149.75 pixels.
+
+And I'm going to say that this one and only this one at the end should have a width of 200 pixels.
+
+Well, when I do that, sure enough, it does grow to be 200 pixels exactly. But it does this because
+
+there's all this extra space. So it has no problem for where it's going to get those extra 50.25
+
+pixels from. But what do you suppose happens if it doesn't have that space? Well, what we can notice
+
+is now it's 181 pixels. It is shrinking. It's not actually respecting this bound that we set. So
+
+that's one thing that's important to note is that width and height, they're not hard rules in
+
+Flexbox. They're more like suggestions. They're saying this is what the hypothetical width should
+
+be. But I understand if you have to change that based on different constraints. So similarly,
+
+right, it's going to keep shrinking until it can't shrink anymore. And this happens the same across
+
+both axes. So if I switch this to be column, well, the first thing we notice, and let me make this
+
+bigger, is that width is the wrong property to set. Because I don't want to control its width.
+
+I want to control its height. So if I change width to height, we observe much the same behavior,
+
+which is in a world where it has enough space to breathe, it respects the 200 pixels of height.
+
+But then as the height gets smaller and smaller, well, it can't respect that anymore. In this case,
+
+it's a little bit different, right? When it comes to text being, when it comes to flex columns,
+
+the minimum content is the height of the single line. If this was multiple lines,
+
+that height would grow. But other than that one weird caveat, it's the same idea, which is
+
+when you set a height on something, you're setting the hypothetical height, not necessarily
+
+the current height. If you've ever struggled with what the deal with flex basis is, right,
+
+maybe you've heard of this. The idea with flex basis is it's the same thing as width or height,
+
+but agnostic to whichever axis is selected. So if I change height to flex basis, well,
+
+it works exactly the same way as width does when we're in a row, and it works exactly the same way
+
+that height does when we're in a column. So it's just, you could almost think of it as like a
+
+shorthand. It's not entirely accurate, because the other difference is that if I have both a height
+
+and a flex basis, right, let me say that the height is 100 pixels, flex basis always wins.
+
+Even though height comes after flex basis, right, if I didn't have flex basis, it would have an
+
+effect, but on its own, flex basis wins. I know that that's like one of the bigger confusing things,
+
+which is like, what is the difference between width and flex basis? That's really all that it
+
+is. They both serve exactly the same goal, which is to set the hypothetical size of an item. Okay,
+
+so let's go back into a row. And let me remove my flex basis and my height. By the way,
+
+height does have an effect in this case, because flex basis is controlling width. So it is like a
+
+little bit, a little bit funky, but let me remove these properties. And now we're back in our world
+
+where they all have a hypothetical size, which is equal to the size of the content, right, is almost
+
+you can think of it as fit content at this point. But what happens if we want to consume this extra
+
+space? So I'm going to pick the first item and I'm going to give it a flex grow of one. And really
+
+what I've instructed is all of that white space at the end should be absorbed into this first item.
+
+It should consume any additional space. And this overrides its flex basis as well. So if I said
+
+either width or in this case, flex basis of like a hundred pixels, it's actually not really doing
+
+anything because growing is another constraint that overrides flex basis in the same way that
+
+if there isn't enough space, it shrinks. If there's, if it's already being told to do something,
+
+that priority kind of wins out. But here's something interesting. If I shrink this container,
+
+right from all of this point, it's having this effect of consuming all this free space,
+
+right? All of this, this white space at the end is getting absorbed into this. When I have flex grow
+
+one, but then what do you suppose happens if I had flex grow in this case, when there isn't any free
+
+space? Well, the answer is that it doesn't do anything, right? Because flex grow is all about
+
+consuming additional space. And in this case, we don't have any additional space. Another really
+
+common point of confusion around flex box has to do with flex shrink. So let's talk about that
+
+on this first item again, I'm going to set flex shrink of 10. And right away, you notice something
+
+happens there. So notice now flex shrink has no effect in this case, when there is abundant space,
+
+flex shrink is essentially how quickly should one item shrink its hypothetical size when there
+
+isn't enough space for it to have that hypothetical size. So when I set flex shrink to 10, notice how
+
+hello world is shrinking 10 times faster than the other items. And I can make this even more
+
+egregious, right? Let me make it 100,000. Now, it almost seems like these other three items,
+
+they're not shrinking at all. It's only flex world that's shrinking. But check this out. Once I hit
+
+this minimum content, all the other ones start shrinking. And if I make it so small that there
+
+isn't enough space, right, if it overflows, because they're all at their minimum content size,
+
+flex shrink has no effect. So there's a really important high level thing here that I want to
+
+talk about, which is flex shrink only does something when the items are between their
+
+minimum size and their hypothetical size. And flex grow, conversely, only does something when
+
+items are above their hypothetical size, right, when there is an abundance of space so that they
+
+can grow beyond that hypothetical size. Flex shrink has no effect if the items are too small to fit.
+
+And this is I think is one of those really confusing things is you're cranking up the
+
+flex shrink, and the item is still just it's not shrinking. And the answer for that is that the
+
+content can't shrink anymore, right? Shrinking is only about how do I distribute the space
+
+between my minimum content and my hypothetical size. I know that this can be a lot to absorb,
+
+especially if you haven't dealt with these ideas a lot already. So if you're finding that you're
+
+having trouble following or even just understanding the implications of everything we've talked about
+
+in this video, I think it's a good idea to go down, do some of the exercises and then come back
+
+up here and rewatch this video. Because I think that the ideas in this video are like foundational
+
+how flexbox works. And it might take a couple playthroughs for it to all really click. But
+
+it's super important because once it does click, everything else with flexbox just makes a lot more
+
+sense.

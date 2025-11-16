@@ -1,0 +1,57 @@
+So I do hope, dear students, that you can forgive me for the absolute plethora of cat references in
+
+this course. I happen to be a cat person and as a result I can't help myself. I know not everybody
+
+is a cat person. I promise I'll try and squeeze in some dog ones at some point.
+
+But in this exercise we have what appears to be a newspaper written by cats, where we have an image,
+
+a headline, a little summary, and we have three of them. And right off the bat things are not
+
+so great in terms of the UI. The biggest problem that I see is that the image is so large that
+
+it's causing a page-wide overflow. So let's take a look at this markup and see if we can figure out
+
+what's going on here. So we have a main which includes articles. There are three of them,
+
+right? This is kind of the container for each individual article. And I guess a good place
+
+to start would be to fix the images. So I'm going to target all images inside articles and I'm going
+
+to say width should be 100%. It doesn't solve all our problems but it solves a big one. Of course
+
+now we have a new problem which is these images get absolutely enormous but that I think we can
+
+solve with some flexbox. So let's say that we're going to add a style on main and I'm going to set
+
+display flex. And just like that we've kind of made pretty good progress where we have three columns
+
+that are side by side. Everything fits. There's no overflow but of course the problem is that they
+
+are asymmetric. This one is way too narrow for example. And this happens because the content is
+
+different sizes, right? It's there isn't enough space to fit it because each of these columns
+
+is pretty big so it has to shrink them and then it shrinks them according to their intrinsic sizes.
+
+If we want them to be evenly sized well that's where our new flex shorthand comes in. So let's
+
+target all articles and I'm going to say flex one. To summarize what's going on here and why this
+
+works, right? If we had imagined setting flex grow to one it wouldn't solve our problem. We
+
+would still have our asymmetric columns and the reason for that is that there is no free space
+
+to distribute. If we set flex one it has the effect of essentially resetting all of their
+
+widths to zero pixels taking a look at how much space is in the container and then distributing
+
+the total space between these three columns. It's also worth noting that our images kind of just
+
+scale perfectly and the reason that happens is that we added this line up here. If I get rid of
+
+this well now we have a problem because all of the images have their own intrinsic sizes that are
+
+quite big in most cases. We want the image to scale with the column and the column to be scaled
+
+based on the parent. So we add this little tag and all of our columns work properly.

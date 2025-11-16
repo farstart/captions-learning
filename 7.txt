@@ -1,0 +1,61 @@
+So this one's kind of fun. Our goal is to construct a chat UI, like you might find an iMessage or
+
+whatever, and we have a list of messages. It's represented here in the HTML with an ol tag,
+
+ordered list, which may strike some folks as a bit curious. Ultimately though, I think it's the
+
+right approach, because even though we don't see any numbers, it is still an ordered list, right?
+
+If we shuffled the order, then the conversation wouldn't be coherent, so I think semantically
+
+we're on solid ground. We also have these classes we can use to tell whether it should be
+
+from us or to us, right? The blue ones are from us, and they have this sent class. I also recognize
+
+that if we were doing this in React or another component framework, this would look a little
+
+different. Ultimately, I chose to do it this way, just because we're focusing on the underlying
+
+concepts in a little bit. We'll see how this works with components. To get started, I want
+
+to start by grabbing our ol, and let's start by setting display flex and flex direction
+
+column. That doesn't appear to do very much. It just kind of puts us back to where we were,
+
+but of course now we can start taking advantage of other flex properties. We have a choice to
+
+make, and honestly, I don't think the decision is super important. We have to figure out whether
+
+we want to push everything to the end and then pull sent or, sorry, received messages to the front,
+
+or keep everything as it is and then just pull our own sent messages to the right.
+
+Let's do that one. Honestly, it really doesn't make a big difference. I'm going to say that
+
+message sent should have its own styles, and here I'm going to use our new align self property,
+
+and I'm going to say that it should be flex end. This is kind of a cool thing because it kind of
+
+makes sense that if we want some of the items to be on one side, some of them to be on the other
+
+side, and we want to be able to pick on a per item basis, we can set one as the default,
+
+flex start, and then we can just pluck the ones that we want and pull them over to the other side.
+
+So that's what we're doing here. It works pretty great. The only thing remaining,
+
+if we really wanted this to be true to form, we want the messages to be coming from the bottom,
+
+so all of this stuff should be bottom aligned, so we can do that. We spoke about this in a very
+
+recent exercise, but here we've been given the styles that we would otherwise need for HTML
+
+embodied to take up full height, so if I set ol to have height 100%, then it will actually make
+
+it so that our ordered list takes up the full space. With that done, I can set justify content
+
+to flex end. In this case, our primary axis is vertical because this is a column, and so I'm
+
+just saying take all the items and pull them down to the end of the flex container, which just gives
+
+it a little bit more authenticity in terms of a chat application.

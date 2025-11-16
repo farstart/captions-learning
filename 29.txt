@@ -1,0 +1,189 @@
+Well we've reached the halfway point in this workshop and given that there are only four exercises
+
+that means that we are on the penultimate one now and the goal for this exercise is really to
+
+to do all the window dressing to do all the trimming around our shoes themselves so we're
+
+not going to touch anything within this grid but we are going to do the heading above it and we're
+
+going to do this sidebar with the breadcrumbs and if we look at where we start with this one
+
+we definitely have our work cut out for us in fact we don't even see that we have a sidebar
+
+but indeed if we scroll down far enough we do see that this part actually seems pretty good it's
+
+just in the wrong spot in order to figure out where we have to do our work like where all these
+
+components live we can use the dev tools so i'll just grab one of these components and we'll make
+
+this a bit bigger it seems like i have these two columns main column and left column and they're
+
+both defined inside a file called shoe index so handily enough i have that file open and we can
+
+see exactly what we were just looking at which is i have this main column that has my header with
+
+title and filter the grid itself and then i have the left column with breadcrumbs and with a shoe
+
+sidebar and as has become tradition at this point we're going to start by saying display flex
+
+when i do that we do get the right general idea except our sidebar is on the wrong side
+
+and i'm sure for many folks the instinct is to go and just move it so that i mean it even kind
+
+of makes sense right the left column should be on the left and so it should come before
+
+something that would be on the right and if i do this it does solve this problem but it introduces
+
+a subtle usability issue which has to do with tab order right like if i'm tabbing through these
+
+items we can imagine i'm specifically looking at running shoes i want to see the running shoes and
+
+i want to see them before i have to navigate through 15 different links to different categories
+
+that i probably don't care about so this is granted something that we could debate like maybe
+
+that is the desired behavior in some cases but in this case i feel pretty confident to show me the
+
+shoes and let the person navigate to other categories if none of these shoes speak to them
+
+um okay so now let's go and figure out how to do that we could use the order property right make
+
+the order of this one too or actually let me move it back so that it's in the right spot make the
+
+order of this one to the order of this one one but rather than do that i would rather say that
+
+we should tweak the flex direction and instead of having it be row we'll have it be row reverse
+
+when i do this we are left with one little curious thing which is there's all this awkward space
+
+over here the reason for that is that flex direction row reverse flips the direction of
+
+start and end right so flex start is now on the right side and flex end is on the left side and
+
+in a row or really in both flex directions things try to stack near the start so in order to solve
+
+this we could maybe use justify content space between and just kind of push them but i actually
+
+i want this column to grow so let's do that let's go to our main column and we will say flex one
+
+and when i do that we can see just from the filter here this one grows of course it grows
+
+a little bit too much we're going to have to figure something for that out but first i want
+
+to address something which just to make our lives easier you'll notice if i make the window
+
+smaller than 800 pixels or even really like if i make it of any size with my current resolution
+
+the sidebar gets pushed way off the page the annoying thing about this is it's not a real
+
+problem and what i mean by that is that when we deal with the shoe grid this problem will go away
+
+the trouble is that the we have these giant images and because we haven't given them an explicit
+
+permission to shrink they won't shrink they have their min content which is enormous
+
+and they're blocking all of our progress so i think rather than deal with like let's do half
+
+of the shoe grid now and half later let's just remove the shoe grid so i have this component
+
+and just like that we can remove it and now wind up with much more predictable much nicer behavior
+
+of course not permanent right we do want to have a shoe grid but that'll make our life easier for
+
+now and i want to solve the fact that there's this zero space between the two and if we look
+
+at our design we do see that there is kind of a prescribed width for this sidebar so 248 pixels
+
+and then there's also an additional gap of 32 pixels so we'll deal with both of those things
+
+we will say that our left column should have a width of actually let's use flex basis of 248
+
+pixels i could also change this to min width if i really wanted this to be a firm number
+
+but i tend to do that later if needed we'll see if it comes to that in the meantime i'll say that
+
+it has a flex basis of 248 and if i needed to support internet explorer and depending on when
+
+you watch this safari i would then add a margin right of 32 pixels because i'm building this in
+
+kind of a forward looking way and by the time you watch this it really may not be necessary
+
+i'm going to say that this should instead be a gap so that between our two columns
+
+there will be a gap of 32 pixels when i do that things are starting to look pretty good
+
+we can verify that all of our numbers are right we do see that with this we have a width of 248
+
+pixels and we can kind of just measure that there is this gap of 32 pixels okay what's next well we
+
+have a subtle detail that is super important and really contributes to this feeling like
+
+a professional design is baseline alignment and it's kind of cool that we can actually draw let
+
+me make this a little bit bigger we can kind of draw a straight line that runs along the baseline
+
+of every bit of text in this line from the breadcrumbs on the left to the filter select
+
+input on the right and that may seem pretty tricky especially because if we think about how
+
+it's structured right we have a left column over here and then we have a main column over here so
+
+these elements don't share they're not just all arranged in one row so how do we do this
+
+well it turns out that align items baseline is honestly pretty magical and we'll see how
+
+exactly that works let's put it way at the top right so we have this wrapper that houses both
+
+of our columns let's say align items baseline when i do that you'll notice the heading over
+
+here gets pulled up so now even though these are in two different siblings and both of these
+
+containers have a whole bunch of stuff it happens to align them because they're both at the top of
+
+their container and baseline alignment is really kind of smart and can usually intuit what you're
+
+trying to do of course we're not there yet because we have this sort which is all being arranged top
+
+bottom right now so let's pop into our let's see what it is we have this header element that has
+
+two children and we're going to have to put them into a flex container so we will say display flex
+
+when i do that we're left with what appears to be a horrible mess
+
+just because we have this what i presume is a label that exists beside our filter so let's
+
+go look at how that works and this select component is very similar to the one we built in module three
+
+but it does have this additional bit of let me make it a single does have this additional
+
+does have one additional element which is this visible label section and right now visible label
+
+and select wrapper exist within this wrapper so once again for the third time this exercise
+
+let's add display flex so when i do that we've definitely moved a step in the right direction
+
+we now have our label which is beside our input our select but they're not sharing baseline
+
+alignment so let's add that as well we will say align items baseline
+
+and now we have one more baseline problem which is that these two elements are sharing a baseline
+
+and these two elements are sharing a baseline but they aren't sharing the same baseline so once
+
+again for the last time we'll go back to shoe index and we will say on our header align items
+
+baseline and with that you'll notice it moves these two down and now at long last we have
+
+a single cohesive baseline for all of these elements it is just pretty darn cool that we
+
+can do this right baselines can be used recursively like this nested the only thing that i see left to
+
+do is the fact that running sort is not a single word here we should have these two items be as
+
+far from each other as possible so let's go back into our header and we will add that the justify
+
+content should be space between and with that we will see that as this window grows and shrinks
+
+the most space all of the leftover space is kept between these two
+
+and i think that this looks pretty darn good

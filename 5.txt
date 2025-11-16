@@ -1,0 +1,127 @@
+All right, so our fiercest challenge yet is to create a responsive navigation menu that
+
+should stack differently depending on the screen size and just look good no matter what
+
+the context is.
+
+And we have some basic guidance here from the fact that these comments are laid out
+
+the way they are.
+
+So we have our mobile styles by default and then we're given the media query.
+
+This incidentally is kind of a weird size, but it works in the context of this playground.
+
+We probably want this to be a bit bigger because most mobile devices are bigger than 300 pixels
+
+anyway.
+
+Okay, so I'm going to start by adding some styles on our unordered list.
+
+We're going to say that it should be display flex and then because on mobile we want them
+
+to stack in a column, we need to switch the flex direction.
+
+Set this to column and now we're kind of right back where we started, right?
+
+Because in a column, individual flex items behave quite a lot like block elements do
+
+in flow, except now we've opened up the whole world of magical flexbox properties and we're
+
+going to take advantage of those.
+
+I'm going to say align items center.
+
+Reason for this is that column, our primary axis is top down, our cross axis is left right
+
+and I want them to be horizontally centered.
+
+So that's the property that I need.
+
+I also, and this isn't strictly part of it, but it's a nice thing to do.
+
+Let's also give our anchor tag a bit more padding and we have to change it to display
+
+block so that it takes that padding.
+
+There is a kind of a mini flex lesson here, which is the flex layout mode is not recursive.
+
+So I'm adding the flexbox styles to the unordered list, which means that the list items are
+
+rendered using flex layout, but any children of those list items like our anchor tags are
+
+just regular flow elements.
+
+And an anchor tag by default is in line, which means that padding wouldn't affect the vertical
+
+direction.
+
+And the reason I want to add padding is to give myself a bit more space between the units,
+
+but also to do so in a way that increases the tap size because I could have done this
+
+on the list item, right?
+
+It would have essentially the same effect, but now I can't click this area over here.
+
+Whereas if I make it the anchor tag, all of this is clickable depending on your circumstance.
+
+Like actually, the best thing would probably be to add a little bit in both.
+
+Like maybe let's make them four each or something.
+
+That way we still have, you know, we don't necessarily want the links to be touching,
+
+but we do want to increase the tap size to whatever whatever seems reasonable in your
+
+own experience.
+
+You can pull it up on a phone and try it and try to like slightly miss and make sure that
+
+it still does what you expect.
+
+But okay, I'm getting wildly off topic.
+
+We have a mobile UI now that seems pretty good to me.
+
+So let's shift gears to the desktop variant.
+
+I'm going to add some styles on that same unordered list.
+
+And the first thing I'm going to do is flip the flex direction so that it's back to row,
+
+which is the default value, because I don't want them to stack that way on desktop.
+
+Now we see that things are looking okay, but I want them to be kind of spaced apart.
+
+And that means we have to find the right justify content for this situation.
+
+And you know, you could experiment with them.
+
+So I'm going to start with space evenly and see how that feels.
+
+And this to me feels pretty good.
+
+And the cool thing is once I get to a certain size, right, once a 300 pixel threshold is
+
+met, they collapse automatically to stack vertically, which I always just think feels
+
+so cool.
+
+It may strike folks as curious that I added this align item center on mobile and I haven't
+
+undone it on desktop.
+
+Ultimately, when we're on desktop, there isn't really any cross axis play.
+
+So it doesn't really have any effect.
+
+If it bothers you, you can get rid of it.
+
+You could say align items initial, but in my mind, it doesn't really hurt anything.
+
+And if we ever do give our nav a specific height, we probably do want them to be centered.
+
+So ultimately, this is a pretty good option, even though it doesn't have any practical
+
+impact right now.

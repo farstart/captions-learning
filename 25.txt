@@ -1,0 +1,25 @@
+So this is kind of an interesting one, because it's not really how we typically think about
+
+centering, right? Typically we imagine centering a narrow item inside a wider container.
+
+How do we center something that's bigger than the container itself? Well, the trick that we typically
+
+might use to center an item, right, which is auto margin, unfortunately that doesn't quite work.
+
+It works when the item can fit, like it works at this size, but then it just stays left aligned
+
+when it's too big to fit. Happily though, Flexbox kind of gives you this for free. So if we go to
+
+the wrapper and we'll put display flex on it, we'll make sure that it is a column, because our items
+
+are stacked vertically. Then if I say align items center, we kind of just get that behavior just
+
+like that, right? It works when it's smaller than the container, but it keeps working even when it's
+
+bigger. Of course, in this example, we've also centered our paragraph and every child, so we
+
+can borrow a trick that we saw in the very previous recipe and use align self.
+
+That way we're centering this cat photo and any other items that want to share this behavior
+
+without subjecting all children to the centering.

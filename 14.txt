@@ -1,0 +1,63 @@
+So in the last exercise in the last lesson, we built this Facebook style layout. I do, by the way,
+
+really recommend watching the video for the solution, even if you solved it on your own,
+
+because it's a really valuable video. But in that video, we added these flex basis properties in
+
+order to set hypothetical sizes so that when the window gets smaller than this, we first enlarge
+
+the sidebar and then eventually once we can't fit the purple area, it shrinks exclusively from that
+
+purple container. There's a subtle thing that we can do that breaks this, and I think it's worth
+
+really talking about because I've made this mistake so many times. And the mistake is,
+
+what if I change this flex basis to width? Well, we can see that it changes what happens and it
+
+breaks our solution. In fact, it makes it so that this sidebar is really big. But that's weird,
+
+right? Like we talked about how in a flex row, width and flex basis do exactly the same thing.
+
+So shouldn't I be able to use them interchangeably like this?
+
+Well, what's actually happening here is we are setting a flex basis. And remember,
+
+if we have a flex basis, it will always win in a battle against width. And the reason for that is
+
+that we have this flex shorthand. Remember that the flex shorthand sets all three properties. It
+
+sets flex grow to be whatever the number is, in this case, one. It sets flex shrink to be one.
+
+And then it sets flex basis to be zero pixels. And the order doesn't matter, right? It doesn't
+
+matter that the width comes later. Flex basis, when defined, will always win over width. So it's
+
+as if we don't have this property, right? This property has no effect right now because it's
+
+being overwritten by flex basis. Without that property, we're back in the realm of flex grow
+
+because the hypothetical size of this element is zero, right? That's what we're setting it to right
+
+over here. And the hypothetical size of this one is 250. So the total size of all elements is 250
+
+pixels. And because we have much more than 250 pixels in this container, we're back in the realm
+
+of flex grow, where because this one is set to grow, it's going to consume all the extra space.
+
+That's why it's the only one growing. And this one can sit comfortably at its hypothetical size.
+
+I believe this is one of the reasons that the specification strongly encourages using the flex
+
+shorthand, right? Like actually writing all of this stuff out and using flex basis instead of
+
+width or height so that you never have these issues, these very, very subtle conflicts,
+
+whether it's overwriting it. And I'll do the same thing up here. I'll set flex to be zero,
+
+999999 and 250. And then I'll get rid of these ones. And by doing it this way,
+
+we conform to that best practice. It ultimately works exactly the same way, right? Like we haven't
+
+changed the functionality, but by defining it kind of all in one shorthand like this and not
+
+using width or height, we avoid this whole class of possible issues.

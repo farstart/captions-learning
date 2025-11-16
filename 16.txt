@@ -1,0 +1,53 @@
+So in the English language we have the word items and we have the word content and honestly in most
+
+situations I feel like you can use these words interchangeably, at least to me they seem like
+
+synonyms, but in the world of Flexbox they have very different definitions indeed. And we can
+
+illustrate this by looking at one of these early Flexbox demo units and noticing that justify
+
+content has kind of two parts right there's justify which has to do with the primary axis
+
+nature of the alignment and then there's content and in this case the content refers to the fact
+
+that we are positioning a group of items with justify content you can take these four items
+
+and move them all to the center or all to the start or you can like split them up and have
+
+space between them right you're positioning things not as individual units but as a cohesive group
+
+whereas align items right align refers to the fact that it's the cross axis but items refers
+
+to the fact that every item is being positioned kind of on its own even though we're positioning
+
+all four items they're all being managed individually I don't have to worry about
+
+spacing between them it's just all the items should go at the start or they should stretch
+
+whatever it is and this has interesting implications when we start talking about
+
+line wrapping because when you have flex wrap all of a sudden in our cross axis direction we
+
+have multiple items right so what does it mean to take an item and align it in the center well we
+
+can try it we can take a line items and say center and you'll notice that each item moves within the
+
+context of its own row right like this item over here can move from this would be the start and
+
+this would be the end but what if we want to move the whole group in the same way that justify
+
+content moves the whole group well for that we have a line content and as you can see I can say
+
+center and then they all come to the center I can say stretch in which case they all kind of move
+
+apart from each other it's all of the same principles from justify content but applied
+
+to the cross axis these two properties kind of live harmoniously together because they both do
+
+slightly different things now I'll be honest I don't really use align content super often
+
+at least not in flexbox but we're going to see it again when we look at css grid and honestly I
+
+think it's worth learning just to help us clarify the difference between justify content and align
+
+items and understand why they chose different words there

@@ -1,0 +1,151 @@
+So with our super header in the bag we continue our trek onwards and our next stop is the regular
+
+header, the primary header, and at first glance this might seem to be a little bit more straightforward
+
+even right there's less elements that we have to worry about but it's actually a pretty tricky
+
+thing and it's tricky because of our navigation which sits right in the middle of our page right
+
+I can check and see that it's the same distance from either end well off by one but that's just
+
+rounding and this is a really tricky thing because we have an asymmetry around it right we have the
+
+logo on the left side and absolutely nothing over here on the right and I've seen so many very crafty
+
+solutions around this right making the logo position absolute but then you have all these
+
+other trade-offs like if the window gets too small they're going to wind up overlapping because
+
+absolutely positioned elements aren't in flow there is a way to do this with flexbox but it
+
+requires a little bit of lateral thinking specifically instead of trying to center the
+
+navigation we have to think more in terms of consuming all the space and squeezing the
+
+navigation into the center incidentally so I'll show you what I mean by that and let's start by
+
+looking at some code so inside our main header we have our logo and our nav and I want to consume
+
+all of the space and split it evenly between both ends I want to have like a column on the left a
+
+column on the right and both of those columns are going to greedily push the nav towards the
+
+middle so we're going to start by adding a side element just call it side and we're also going
+
+to wrap logo inside now we could add some styles to logo but just for in terms of css reusability
+
+it seems nicest to do it this way so I'm going to create a new element called side
+
+we'll make it a div because it doesn't have any particular semantic meaning
+
+and actually first I have to set the container to be flexbox then I want to have my sides be
+
+greedy so we'll do this with flex one and when I do that funnily enough our navigation appears to
+
+be perfectly centered right like I can measure it and see we have 413 pixels on this side and
+
+412 which again rounding so that's it but why does this work why is it doing this well we can
+
+inspect it with the dev tools and see and what we'll discover is we have a side element over here
+
+taking up 258 pixels and a side over here taking up 258 we have to remember how flex one works it
+
+sets flex grow to one but it sets flex basis to zero what that means is that it sets the hypothetical
+
+size of both sides to zero and you know for the right side that's no problem because it's empty
+
+but the left side has stuff in it so it shrinks that to zero and then it looks and sees how much
+
+free space is there and the free space is everything other than this navigation
+
+and it consumes all of that free space and then it distributes it based on flex grow
+
+and because both of these have the same number they're both one it distributes all that extra
+
+space evenly so you have two columns on either end that are both distributing all the space
+
+and the nav has no choice but to sit in the middle because if there's a left side and a
+
+right side that are both equal in size and not only equal but taking up all the space it forces
+
+it into that position so this is a really neat trick one that i haven't seen used too much
+
+but hopefully that can become a dependable part of your toolbox what's next what do we want to do
+
+so i notice now that this is very much too short we want it to be taller let's go see exactly how
+
+tall and it looks like it is a 72 pixel tall header so we'll just add that as height
+
+with that done it exposes a bit of an alignment issue and in fact we already had an alignment
+
+issue in terms of the text baseline right like we want our navigation to share a baseline with
+
+our logo that's the way it would be if you wrote it on a page so let's solve that let's take a look
+
+and see how to do that we can do that with just align items baseline so with that done we have
+
+this very nice baseline text right like we can draw a nice line and it'll be just like as if we
+
+were writing it on paper but now we have to figure out how to center this entire item within its
+
+parent column honestly this is kind of a tricky thing because normally we could use line height
+
+but that has its own trade-offs and the alternative is to use a separate container for this which
+
+ultimately makes things quite a bit more complicated because we already have so many flex containers
+
+so i'm going to do something a little bit hacky but honestly i think given the trade-offs it makes
+
+sense and that hacky solution is to use padding to kind of pseudo center it so the way that i'm
+
+going to do that is i'm going to come on to this main header over here and i'm going to say that
+
+it should have 20 pixels of top padding and bottom padding too why not um if we look at that now the
+
+whole thing moves down and that number doesn't look exactly right to me so maybe let's try 18
+
+the fact that we have to kind of guess numbers in order for it to be centered might seem like a
+
+bug but i actually think that's a bit of a feature because ultimately we don't need it
+
+to be mathematically centered we need it to be optically centered and in fact if we look at the
+
+design if we pay very very close attention what we'll notice is that we're not actually perfectly
+
+aligned anyway we want it to be very slightly disaligned or unaligned so that it looks right
+
+to our eye so even though this is kind of a weird pattern it works fine right like even if you zoom
+
+in and out it doesn't break anything everything scales accordingly and it gives you really fine
+
+grained control to make sure that it looks exactly right it's not the right solution in every case
+
+right if the content is dynamic and you don't know how tall it's going to be then that won't work
+
+you're going to have to use something like a flex column to center it but in this case i think it
+
+solves the problem just fine next in our set of problems is the fact that all of our navigation
+
+items are all squashed together right like i don't want i want them to have a bit of breathing room
+
+and we can check in the design it looks like it keeps them 48 pixels apart so in our nav i'm going
+
+to start by setting this to display flex and then i'm going to say that the gap inside should be 48
+
+pixels when i do that it actually seems to work all right but it exposes another issue which is
+
+i want some space inside here right like even though like right now it's working as intended
+
+which is this space is equal to this space when the window gets small i don't want to let them get
+
+that close together i want there to be a buffer there and the way that i'm going to do that is
+
+i'm going to say that the navigation unit should have a margin of zero pixels 48 pixels so no top
+
+bottom margin but an equal amount of left and right margin which matches the gap when i do that
+
+it ensures that this space is not going to be collapsible and still make sure that it's centered
+
+when there is enough space and with that i think that we can give ourselves a check mark on this
+
+one and move on to the next part of the workshop

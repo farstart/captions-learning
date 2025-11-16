@@ -1,0 +1,29 @@
+So in this, the first exercise of the module, our goal is to reconstruct the placement of
+
+these buttons inside this dialog. And we're given a fair bit, we have all the UI and there's a bunch
+
+of styles that exist in the CSS tab. Now you're not expected to modify any of these, but if you
+
+want to check them out, it could be helpful. But really our goal is just to figure out how to place
+
+these buttons so that OK moves to the other end whilst cancel stays where it is. And I see that
+
+those two buttons are sitting inside a footer with a class of actions. So that seems like as
+
+good a place as any. Let's add a new selector. And if I just add display flex to that, we'll see that
+
+not much changes. We do truncate out the little bit of space between them, and that's something
+
+we will talk about later. But in this case, I want to align them along the primary axis, right?
+
+Because they don't specify a flex direction, it defaults to row, which is a single row horizontally.
+
+And indeed, that's what I want here. I don't want the buttons on top of each other.
+
+So the direction is right. Now it's just about aligning things along that axis. And in this case,
+
+space between is what I want, because I don't want there to be any space on the edge. If I did,
+
+I could say space around, for example. Some dialogues might look like this. Some others
+
+might even have them both in the center. But in this case, space between is what I want.

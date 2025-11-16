@@ -1,0 +1,193 @@
+So I think at this point we've beaten around the bush enough it's time to add some darn sneakers
+
+to our sneaker store and we can start by uncommenting our shoe grid to bring it back to this state
+
+and I think it's helpful to take a moment and think about strategy so when it comes to two
+
+dimensions and flexbox the only way to do that is with the flex wrap property so we can hop over to
+
+our shoe grid component and essentially what I want I don't want to have to prescribe like there
+
+should be three columns and I also don't want to have to start fussing with media queries because
+
+we could say you know from 600 to 800 pixels have two columns then from 800 to 1000 have three
+
+I would much rather just kind of set reasonable constraints like say the minimum size of this
+
+card should be whatever it is and then let it kind of grow and figure it all out for me
+
+and if we go to our design it seems like each of these shoes wants to be about 340 pixels
+
+um I think you know we could experiment with different numbers I'm just going to say that I
+
+want the minimum size to be 275 pixels and there's this shoe card component there is a bit of a
+
+component design idea here which is do I put the size and all of the other flex stuff that we're
+
+going to need inside a shoe card or do I do that as part of grid honestly I think both are fine
+
+but I kind of prefer the idea of doing it in shoe grid because then if we want to put our shoe card
+
+in a totally different context maybe without flex at all we have that option so I'm going
+
+to start by actually adding a wrapper property I'm going to say shoe wrapper wrap it around there
+
+a little bit of a react tidbit is that you have to move the key as well and then I'm going to
+
+create this as a styled component and I'm going to say width 275 pixels when I do that not much
+
+changes and the reason for that is that we still have these big honking images and the image has
+
+kind of an intrinsic size that it wants to respect so let's go into our shoe card and let's find our
+
+image and let's say width 100 and this is a really common pattern I find myself doing where I put
+
+all the flex stuff on the container and then the image is just set to grow to fill the available
+
+space I've noticed if you put the flex properties directly on an image you can get weird aspect
+
+ratio stuff so we're going to sidestep that whole bit of complexity and just have the image fill
+
+the container the container be agnostic to how big it needs to be and we're going to manage all of
+
+this in our shoe wrapper in the grid component when I do that well that's a lot nicer right we
+
+have a bit of breathing room but of course we still don't have an actual grid so in our wrapper up
+
+here we'll say display flex flex wrap wrap and that gets us to be some amount of the way there
+
+right it has kind of the effect we want of course two problems one is that these cards are all glued
+
+together and the other is that they're not growing and shrinking at all so let's solve the first
+
+problem and this is one of those things that if you have the luxury of being able to use modern
+
+properties it is a much simpler solution so we're going to do both because I think it's worth
+
+showing you both alternatives the way to do it in the modern way is just to add a gap of whatever
+
+the number is and in this case I believe that number is 32 pixels so I do that and I am gifted
+
+with these very very nice gutters between the elements without any issue in terms of our
+
+alignment on the left edge or the right edge but we haven't dealt with that yet what's the alternative
+
+how would we do this well the best alternative I found is we're going to add margin on each child
+
+I'm going to say margin left half of the amount 16 pixels do the same thing on the right of course
+
+when I do that I've solved the gutter problem because I have 16 over here and 16 over here
+
+but now I'm also 16 pixels inset from each edge and you know you might think well I could do like
+
+every third child has no top front margin and every you know you could try to work out the
+
+numbers but the problem is that we don't have a consistent number of cards per row now it's every
+
+second it could be every fourth on a much larger screen so rather than fuss with that I'm going to
+
+go to the parent and I'm going to use negative margin I'm going to say margin left should be
+
+minus 16 pixels and repeat that on the right and if you recall all the way back in module one we
+
+talked about margin collapsing and the idea when you have overlapping positive and negative margins
+
+is you add the numbers together so you know 16 plus minus 16 brings you to zero and that is exactly
+
+what we see over here the last thing to notice is we've lost our vertical buffer because one of the
+
+nice things about gap is it works in both dimensions but we could repeat the same trick I could say top
+
+should have minus 16 in fact we could just say margin minus 16 in all the dimensions
+
+and then do the same thing with this
+
+when I do that we've reproduced the same trick to also happen on the top and on the bottom by the
+
+way in cases like this when we're kind of toggling between two things that should work the same way I
+
+think it's really helpful to save the file and then quickly tab over and wait for the hot reload
+
+and just make sure that nothing shifts slightly because there may be cases where things actually
+
+are different and it's just hard to notice so again save and tab and then look so I feel pretty
+
+good about our gutters but I do have a problem with the the way that it looks and actually it
+
+looks okay at this size and it looks honestly even better at like this size but then it doesn't look
+
+so good at this size right we have all this empty space over here and the reason for that is that
+
+our cards haven't been allowed to grow or shrink they're all kind of sitting at their 275 and at
+
+certain sizes that looks okay but at other sizes that looks dreadful so how do we fix this I think
+
+a lot of people's instinct would be to add flex one right this is kind of our go-to make something
+
+bigger trick and if we do this we're going to get the opposite result of things get really tiny and
+
+squeezed and small and this is like the last thing that we want right I think it's it's instructive
+
+to think about why this happens and it happens because flex one also sets flex shrink to one so
+
+we've been given them the permission to shrink and it's not going to wrap if it doesn't have to
+
+right like why would it line wrap why would it choose some arbitrary point it only line wraps
+
+if it can't fit them on a single line so one way to address this is to set min width instead of
+
+width right because remember width is just a suggestion we're saying this is what I want
+
+the hypothetical size to be before all of the constraints act on it min width is firm and so
+
+the way to think about this now and by the way it does actually seem to work pretty darn well
+
+the way to think about it is that we've given something a constraint of don't get any smaller
+
+than 275 and that's going to be the same that's going to be the hypothetical size too so it starts
+
+by setting it to 275 and in this case for example what that would mean is you have two cards
+
+that are each 275 right something like this and then a bunch of free space then the grow comes in
+
+that additional force acts on it and it grows them to fill that column if the hypothetical size
+
+if we have a three-column thing well then it can hypothetically fit three of them it can't shrink
+
+them below that size so then it grows them to fill the available row there's an elegance to
+
+this that I think is easy to miss that it's this two-step process right where first it figures out
+
+what the size should be in an ideal circumstance and then it applies the growing and shrinking and
+
+since it can't shrink it can only grow and it'll grow to fill the available space in that given
+
+column this does have a side effect though and it looks fine when you have an evenly divisible
+
+number right we have nine shoes and three columns but you'll notice if we only have two columns at
+
+the bottom we have this enormous shoe and it's for the same reason right which is that we've set
+
+there to be a flex grow of one we haven't set a max width so honestly I think this is okay we
+
+can spin this as like a feature if we wanted to maybe we could constrain the height of the image
+
+and do some clever cropping I mean we could fix it in terms of we could also set say a max
+
+width of like I don't know 450 but the problem is we're never going to have it nicely lined up
+
+right there is no way in flexbox to say this child should just be the same size as this other child
+
+if we really need it to maybe we could use some javascript to kind of capture the height
+
+of the first element in this thing and then apply it to anything in the last row honestly
+
+I don't want to go down that road at all I think this is a fine solution even if it looks a little
+
+funny it's just it's a limitation of flexbox css grid is I think the option we have if we really
+
+need it to be a perfect grid and with that I feel pretty darn good about our grid there is still a
+
+little bit of work left to do in terms of the price and the flag but I'm going to leave that
+
+to be a separate video because it's really kind of its own little topic

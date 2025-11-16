@@ -1,0 +1,75 @@
+Well, we've reached the end of another module, which means that it's time for a workshop.
+
+And I know I say this at the start of every workshop, but I really think this one is
+
+particularly exciting and will be a good experience. We're going to build a sneaker store,
+
+and I've taken a lot of inspiration from real-world e-commerce sites because I feel
+
+like a lot of them actually do a lot of really interesting subtle layout work with like flexible
+
+elements. It's the perfect playground to really get some practice in with Flexbox.
+
+So this is the thing that we're going to be building. There is a README, and I hope it's
+
+self-explanatory enough that I don't really have to go into that much detail here, but I wanted to
+
+give you a couple pieces of context just to make it easier to get started and fill in some things
+
+that I think are worth mentioning. The first thing is the Figma that we're going to use for this
+
+also includes a mobile design, and this may be a little confusing because the README doesn't
+
+make any mention of a mobile site. The reason for that is that we will be revisiting this project
+
+in the next module, so we're not going to be touching the mobile side right now, but we will
+
+get to it in a bit. That said, there is still a little bit of responsive work to do around this
+
+shoe grid, so there's still a bit of responsive thinking required. The next thing I want to mention,
+
+this is what the project looks like when you clone it locally. It's a React application,
+
+and you may notice right off the bat that there are these like pre-done elements like the sorting
+
+and the filtering and the searching, but when you start actually trying to use them, they don't do
+
+anything. And this is not that you've done something wrong or there's something missing,
+
+it's just a matter of, you know, we're focusing on the design and the user interface and all of
+
+the CSS stuff that the JavaScript behavior just seems out of scope and not really worth the time
+
+to implement. So it's nothing wrong, it's nothing to worry about, just that's the way that it is.
+
+And the last thing I wanted to mention was, you know, you may look at this and say,
+
+okay, the layout is a bit of a mess, and I can see the work that I'm going to have to do there,
+
+but this is really further along than you were expecting, right? This isn't a blank canvas where
+
+you're going to build everything from scratch. If you are feeling that way, and if that bothers you,
+
+like if you would rather start with a blank canvas, please be encouraged to do that. In fact,
+
+I've left some instructions in the readme for how you would access the assets, like the images and
+
+the fonts, because I think that would be a great idea and a great chance to practice with everything
+
+we've learned so far and not just Flexbox. At the same time, though, I recognize that not everyone
+
+has the time to do that, and because this is a React application, I didn't want to lean too
+
+heavily into that. I didn't want people to have to know how to build a React application from
+
+scratch. So, depending on your circumstance, highly recommended to do that, but otherwise,
+
+of course, it's just still really valuable to focus on the exercises included, which have you
+
+do all the Flexbox stuff, but give you the other pieces so that you don't have to spend a bunch of
+
+time implementing that stuff from scratch. I think that's all of the housekeeping I had,
+
+so I will let you get started. Please enjoy this one. I think it'll be a lot of fun,
+
+and I'll see you in the solution videos.

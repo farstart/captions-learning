@@ -1,0 +1,17 @@
+So for this one we have to build a pretty common layout with a sidebar and some main content and
+
+happily we're given a bunch of the information that we need. The first constraint is that our
+
+nav should be a third of the total size so I'm going to give this a flex of one and this one's
+
+going to get a flex of two because when we add two and one we get three total units and we want
+
+this to have one of those three units but we also want to give it some constraints. So we want to
+
+say that the nav has a max width of 150 pixels whilst meanwhile our main has a maximum of 500
+
+pixels. When I do that things look pretty decent but we're still kind of glued to the left edge
+
+of our window so let's also mix in a bit of justify content center and with those constraints in the
+
+bag we have what looks to me like a pretty good layout and a completed exercise.

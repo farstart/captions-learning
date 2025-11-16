@@ -1,0 +1,177 @@
+So, almost certainly, this is the most challenging exercise we have faced yet in this module.
+
+It is really non-trivial.
+
+There's a lot of nested details and sub-flexbox layouts.
+
+So please know that if you struggled through this one, that struggle is absolutely worthwhile
+
+and a valid way to learn.
+
+Please don't feel bad.
+
+Let's start looking through it though.
+
+So when faced with a challenge like this, I kind of like to start from the outside in
+
+or from the top down.
+
+The very first thing I want to deal with is the fact that I have two columns, and we'll
+
+deal with what's happening inside this column a little bit later.
+
+So let's start by grabbing the parent element, which has two children.
+
+It has photo roll and main photo.
+
+And I'm going to say on photo viewer, the parent, it should have display flex.
+
+On that first item, photo roll, well, it doesn't seem like it grows or shrinks.
+
+It seems like it has a fixed size.
+
+So I'm going to say that it should have a flex of zero grow, zero shrink, and 200 pixels
+
+of basis.
+
+When I do this, nothing appears to change, and it's because of these dastardly images
+
+taking up all the space in the world.
+
+So let's also target all images inside this element.
+
+And I'm going to say that they should have a width of 100%.
+
+I want the images inside this column to fill the column.
+
+When I do that, we get a little bit closer, and I want to repeat the process for this
+
+other side.
+
+So main photo, I think that's what it's called, yep, main photo.
+
+In terms of the container, I'm going to set flex to one because I want it to be the one
+
+that grows.
+
+And I'm also going to say that main photos image should have a width of 100%.
+
+So with that, we can start to see the shape coming into focus, like an outline in the
+
+fog, right?
+
+We have all the right pieces in place at a broad level, but there's lots of little details
+
+that we still have to tackle.
+
+And one of the more interesting ones has to do with these two buttons, because when our
+
+viewport is wide enough that this image is the taller of the two columns, we want the
+
+buttons to kind of fall and sit at the bottom of this container to line up with the bottom
+
+of that image.
+
+So how do we do that?
+
+How do we make it so that like this column scales with that one?
+
+Well, we can actually use the trick that we saw in the previous superheader exercise,
+
+but it requires a bit of like lateral thinking.
+
+So I'll show you what I mean.
+
+Let's start by going to our photo roll and let's set display flex.
+
+And I don't want them to sit side by side, I want them to stack top to bottom.
+
+So I'm going to say flex direction column.
+
+And when I do that, I can start positioning things along their primary axis, right?
+
+So I could say justify content flex end, and then these two buttons would line up.
+
+I mean, not perfectly, but we'll deal with that in a moment, too.
+
+Of course, I don't want these two images to fall down.
+
+What I want is for these two images to stay at the top and these buttons to stay at the
+
+bottom, which starts to sound a lot like with our superheader where we had one element on
+
+one side and two elements on the other.
+
+So we can do the same trick, right?
+
+Like if we look at our markup, we have three children, we have button one for the cat image,
+
+button two for the dog image, and then we have this div class actions that holds these
+
+two buttons.
+
+So let's grab this actions selector and let us set margin top to be auto.
+
+And I don't actually need this flex end.
+
+It's very much the same idea as before, but now our primary axis is vertical.
+
+So we use margin top.
+
+And then as this container gets bigger or smaller, right, it only matters when there's
+
+additional space because that's how auto margins work.
+
+They consume extra space.
+
+So when it's this size, there is no extra space, so it has no effect.
+
+When it gets bigger, though, all of this stuff at the bottom, this empty space there gets
+
+consumed by that margin.
+
+Also realizing now that all of this stuff is way too close together.
+
+So let's start adding some gap.
+
+So at the very top, I'm going to say gap 16 pixels.
+
+And I'll use the exact same gap on this flex column over here.
+
+That way, this vertical space here matches this horizontal space here.
+
+It also occurs to me that these two buttons should be kind of separated.
+
+So in our actions, I'm going to set a third display flex, and I'm going to say justify
+
+content should be space between.
+
+We are so, so close now, but there is one small detail that you may not have noticed
+
+because it's pretty subtle.
+
+But these two buttons, they're not actually lining up with the bottom of this image, right?
+
+There is a very slight discrepancy there, and it goes back to something we talked about
+
+in module one.
+
+Remember how we said that inline images have magic space because they're essentially treated
+
+as typography?
+
+Well, that's what's happening here.
+
+So we can use a number of tricks to solve that.
+
+I think that the most intuitive way is to set line height to zero.
+
+And when I do that, these two buttons kind of move up a little bit because now the container
+
+that houses this image isn't adding extra space for typography.
+
+So it did take three different flex containers and quite a lot of fiddling, but I hope you'll
+
+agree that in the end, once we have these tricks under our belts, we can really start
+
+to apply them to create some pretty sophisticated layouts.

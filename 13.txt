@@ -1,0 +1,193 @@
+So this is actually a really interesting problem. On the surface, it seems straightforward enough,
+
+right? We have this Facebook logo, we want to shrink it. When it gets to a certain size,
+
+we hide one of the sidebars. We have a center column that kind of grows and shrinks.
+
+But there's a ton of complexity here. And honestly, I think it's an incredibly valuable
+
+learning opportunity. So I hope you gave it a shot. I expect you may have struggled if you
+
+tried to match it exactly. And in this video, we're going to go through it and figure out
+
+exactly what's going on. So let's go straight to our problem. And we'll see right away that
+
+we're given a bit of information. We know that the nav and sidebar should be the same size.
+
+And really by this, I mean, they're going to have the same styles. And in terms of their size,
+
+we have a minimum and a maximum. So we can start by applying that information. I will say that
+
+our nav and our side should both have a min width of 150 pixels and a max width of 250 pixels.
+
+That done, I can see that our center column isn't taking up any space because it's an empty div.
+
+And it kind of makes sense that we would want this to grow to fill any available space because
+
+we want our two sidebars to be on either end. And we want the center column to be the one that
+
+grows and shrinks overall. So let's set it to have a flex of one. And kind of just like that,
+
+we have created a workable solution in terms of more or less getting there. But we're not
+
+actually done yet. And you know, like in many cases, this may actually be sufficient. So from
+
+this moment onwards, we can kind of think of this as going down the rabbit hole to really deepen
+
+our understanding of the flex model. So let's go back to the video. And I want to zoom into one
+
+very specific moment in time. And that moment is right when our sidebar disappears, when this red
+
+leftmost sidebar disappears, watch what happens for the next little bit of shrinking. It takes
+
+it exclusively from our sidebar, right? Like at this point in the video with this window width at
+
+1098 pixels, this purple one is a certain size. If I go forward a little bit, this purple one
+
+hasn't shrunk at all. So how can this be? And if we keep going, eventually this green one hits
+
+its minimum size, and then the purple one starts shrinking, and it keeps shrinking until the end
+
+of this clip. There's two ways for something to shrink like this in Flexbox. The first is if there
+
+isn't enough space for both of the children, and one of the items is already at its minimum size,
+
+so it has a min width, well then the Flex algorithm has no choice but to shrink the other one.
+
+But we know that's not the case here, right? We know that at this moment in time, this purple one
+
+isn't at its minimum width because shortly after, it starts shrinking. And like, yeah, maybe there
+
+could be a media query that like has a min width at this size, but not at that size, but we're not
+
+doing that. That's not what it is. The other thing that can happen, the other way this can work,
+
+is if one child has a super cranked up flex shrink value. If this one has a flex shrink
+
+of a million, and this one has a flex shrink of one, well then for every pixel that this one
+
+shrinks by, this green one over here, by every pixel that this one shrinks by, this one only
+
+shrinks by a millionth of a pixel, which rounds to zero. And that actually is what's happening here.
+
+So let's pop back to our code and let's add a flex shrink of some arbitrarily big number.
+
+When I do this though, nothing changes, right? So as I shrink this, we're in exactly the same
+
+situation as before. And I will be honest, this flummoxed me for a minute. I had to kind of stop
+
+and get my bearings and figure out what the heck was going on here. And it helps us to remember
+
+what flex shrink does exactly. Flex shrink is responsible for figuring out which child
+
+to draw pixels from to shrink when there isn't enough space for all of the children.
+
+And how does it determine if there's enough space or not? Well, it looks at the hypothetical size.
+
+So if we look at that right, this sidebar over here has no content, but it does have a minimum
+
+width. So its hypothetical size is 150 pixels. This purple element, our main one by contrast,
+
+has a hypothetical size of zero pixels because it's empty, right? The only reason that it takes up
+
+any space at all is because we've told it to grow. And growing is all about extra space.
+
+Shrinking is all about, well, there is no extra space, and we're trying to figure out how to
+
+solve for the fact that there's too little space. So that's exactly why flex shrink isn't working,
+
+because we're in the realm of growing at this point. I know that it's not necessarily the most
+
+realistic, right? Because in a real application, there would be stuff in this element, and if
+
+there is stuff in the element, the hypothetical size would be bigger. But we shouldn't ever take
+
+that for granted, because maybe the only thing in this container is like a little 50 pixel
+
+loading spinner, right? So we want our layouts to work regardless of whatever content is in
+
+our containers. So how do we fix this? Well, we give it a hypothetical size. And it almost feels
+
+a little arbitrary, like how do we pick the numbers? But it's not exactly, because we care
+
+specifically about this case when this sidebar doesn't exist. And this sidebar disappears when
+
+our width, when our window is 700 pixels wide or smaller. So in order to trigger the shrinking
+
+mechanism, the hypothetical width of these two elements need to combine to be over 700 pixels.
+
+So I'm going to say that main should have a flex basis of 500 pixels. And I'm going to say that
+
+our sidebar should have a flex basis of 250 pixels. And the specific numbers here, I don't
+
+think matter a ton, but the important thing is that the proportions are roughly correct,
+
+and that they combine to be greater so that we engage the shrinking mechanism.
+
+When I do that, check out what happens, right? The sidebar disappears, this green one gets
+
+bigger, and then it starts shrinking until it hits its minimum size, and then this one starts
+
+shrinking. Now, we know this is tricky. I don't mean to imply that this is all like super
+
+straightforward. And I think it might help for us to talk about it from an opposite direction,
+
+right? Let's say that we're looking at this and we're making the window bigger, and we're
+
+trying to figure out why this one is growing. Well, we can do the same calculation from the
+
+other angle, where we say, okay, what is the hypothetical size of this one? Well,
+
+it has a basis of 500 pixels. So it's 500. This one has a basis of 250.
+
+So that's the hypothetical size, but it doesn't have enough space for them, right? We don't have
+
+enough space to fit them. So then it says, okay, which one do I shrink from? And it says, well,
+
+this green one has a flex shrink of, you know, much, much higher than the default value flex
+
+shrink of one. So this is the one that it should shrink entirely. But it can only do that up to
+
+the minimum width, right? So because this has a minimum width, it can't shrink from this one
+
+anymore. So like without this constraint, right, without this min width, this green bar would be
+
+like a single pixel wide, because it would be the one that the shrink algorithm is pulling all the
+
+pixels from. So when we're growing, right, this one is already way bigger than the algorithm would
+
+want it to be. So it's not going to give the sidebar any more pixels. It's going to give them all
+
+to our purple container. But then why does this happen? When we hit this point, why is it
+
+this point here? Why is it that our purple one stops growing and the green one starts growing?
+
+Well, the purple one stops growing when it hits 500 pixels wide. So like at this point in the
+
+algorithm, this thing is exactly 500 pixels. The moment this element hits 500 pixels, shrinking
+
+stops applying because it's at its hypothetical size. And shrinking is all about how do I subtract
+
+to make something fit? It's already big enough to fit, right? So now it's dealing in the grow realm
+
+of like it would grow if it has additional pixels left over. But we don't have any pixels left over
+
+because the hypothetical size of both of these is 750 and we're not at 750. I do realize that this
+
+is not simple stuff, right? It's totally reasonable that you may be at this point in the video and
+
+feeling like all this stuff is going over your head. Honestly, this stuff trips me up and I've
+
+been using Flexbox for many, many years. So please don't feel bad if it's not coming naturally. And
+
+if that is the case, I have a suggestion. What I suggest you do is that you copy this code and
+
+I'll have it in like a thing below this video, paste it into your solution and experiment with
+
+it. Like try to change the numbers, investigate things with the dev tools, right? Like poke around
+
+with it and see if you can build an understanding that way. Learning through experimentation is
+
+super, super effective and you can combine it with this video. So experiment for a bit,
+
+re-watch this video, repeat that process. I promise eventually this stuff will start making sense.

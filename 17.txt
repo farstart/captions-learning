@@ -1,0 +1,43 @@
+So this exercise feels a little bit like an anomaly to me, where all the other stuff we've
+
+been doing with Flexbox involves flexibility, right? It involves items that are growing or
+
+shrinking. In this one we have these three cards that really just kind of keep the same size,
+
+and the way that they solve the challenge of fitting into different viewports is through
+
+wrapping and positioning with being centered in that. So we can start by giving our items
+
+a flex grow of zero, because we don't really want them to grow, and a flex shrink of zero,
+
+and then it all comes down to the flex basis, and I'm just going to pick a number, let's say 100
+
+pixels. When I do that, we have these three columns that are cemented in place, and they are not going
+
+to do anything, right? Like if the container is too small, they're just going to overflow.
+
+They are very much rooted in place, and we don't want that. So, and I also can kind of tell that
+
+they're a little bit narrow, so let's make them wider, and then let's set flex wrap to wrap,
+
+and when I do that, when they don't fit in the container, they just move to the next line.
+
+We've essentially reconstructed inline block items, right? Because that's how inline block
+
+kind of works, but there's one thing missing, and it has to do with centering. So let's say
+
+that we want justify content to be center. When I do that, we have this nice little tiling effect,
+
+right? Where you get this inverted triangle, upside down pyramid, and then if you shrink
+
+below that, they all just stack individually. That works. I do think that one small improvement
+
+that isn't really pictured in the video above is maybe we should allow them to shrink, but only
+
+when they've reached their final position being in a column. So let's change flex shrink to one,
+
+and when I do that, everything behaves the same, like in the general size, right? Where you have
+
+either a single row or two rows or three rows, but then if you get really, really narrow,
+
+the items will squeeze a little bit.

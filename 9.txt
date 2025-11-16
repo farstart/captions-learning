@@ -1,0 +1,45 @@
+So it's become a bit of a theme in this module, but we're going to start by creating a flex container,
+
+and it's going to be on the section because we want the nav and main to sit side by side.
+
+So I'm going to say that the section has display flex.
+
+Next, we have to think about, like, which one do we want to expand?
+
+And our main content is the one that should grow to fill any excess space.
+
+So we'll add that with flex grow one.
+
+That solves that problem.
+
+The last thing that we have to do is if we notice in this GIF, once we reach the point that our main item reaches its hypothetical size,
+
+we want the other nav to be the one that shrinks.
+
+And technically speaking, they're both going to shrink.
+
+But we want nav to shrink at such an accelerated rate that it appears that main is not shrinking.
+
+So we can do that by adding a new property to nav of flex shrink.
+
+And we can just pick, you know, a very big number like a million.
+
+So then what happens is once we hit this point, which is the hypothetical size for main,
+
+well, they're both going to shrink. But like I said, nav is going to shrink a million times faster.
+
+So for every million pixels that this one shrinks by, this one's going to shrink by one.
+
+So, you know, it's tiny, tiny fractions. It's not noticeable.
+
+This one doesn't appear to be shrinking at all.
+
+And that's going to continue until, boom, we reach the minimum size of our nav.
+
+And then it has no choice. It has to take it.
+
+Even though the shrink ratio is so out of whack, it has to take it for main
+
+because there's no more shrinking possible on this side.
+
+And that is our solution.

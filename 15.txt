@@ -1,0 +1,77 @@
+There are many adjectives you could use to describe me, like sophisticated, charming, suave, debonair,
+
+but hopefully a liar isn't one of them, and true to my word, for this exercise we have swapped from cats to dogs,
+
+and now we have a doggy newspaper to work with.
+
+So looking at what we have here in terms of the markup, we have articles that house images with headings and paragraphs.
+
+Honestly, it's quite similar to our cat newspaper exercise, and we've put them in a flex container,
+
+and we've also taken the liberty of doing with 100% on the images, and that's just a matter of, without that,
+
+the images will be whatever their intrinsic size is, which makes them quite large indeed.
+
+And they're all kind of different sizes right now, right, because they're all shrinking relatively.
+
+So let's start by adding flex one, because I want them all to be equal sized columns.
+
+But when I do this, right, when they get smaller and smaller, eventually we hit a point where they don't fit anymore, right,
+
+because this, so this rightmost one has a minimum content equal to the length of the word outdoors at this font size.
+
+It can't shrink anymore while still respecting the padding.
+
+And eventually they all hit their min size, and then we're left with this horizontal scroll bar because they overflow.
+
+So the fundamental benefit to flex wrapping is to be able to avoid this situation.
+
+So I'm going to set flex wrap to wrap, and when I do that, not much changes on the surface.
+
+But once we hit a point where it wouldn't fit anymore, right, when we hit its minimum size and it would start to overflow,
+
+it pushes the last child onto its own line.
+
+And this will keep happening if I get smaller and smaller, right.
+
+So that's cool. But honestly, is this the best user experience, right, having these really, really narrow columns?
+
+Well, not really. So there's a few ways we can deal with that.
+
+One way is to just set a flex basis that isn't zero pixels, right.
+
+Like right now, the basis, the hypothetical size is zero.
+
+So why don't we change that instead of being flex one, we'll say, I don't know, 250 pixels.
+
+And so now what's happening is when an element would shrink below 250 pixels, it line wraps.
+
+And this, now that I see it, it's kind of a big number. So let's make it more like 150.
+
+And yeah, that seems OK. Right. It's cool that we have this control.
+
+So that seems good. It's a little weird that the bottom one gets so much bigger, right,
+
+because we have flex grow set to one and this bottom one doesn't have any sibling.
+
+So it has all this extra space because the spacing happens on kind of a per row basis.
+
+So this other one in its own column, it's not going to automatically stay the same size, right.
+
+They're all growing as much as they can.
+
+So unfortunately, there isn't like a perfect solution that I know of to this,
+
+but we can make it a little bit more manageable by setting a max width.
+
+So if I set it, say, to 250, well, it's not going to grow out of control anymore.
+
+Of course, it is going to be a little bit asymmetrical because it is a different size.
+
+So to briefly summarize how flex wrap works, essentially, we set a default hypothetical size.
+
+And when an item falls below that size, it'll force it to line wrap.
+
+If you have flex wrap set to wrap, you can also set a max width so that when an item wraps,
+
+it won't grow to fill the entire column.

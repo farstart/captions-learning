@@ -1,0 +1,293 @@
+And off we go with the first exercise of this workshop.
+
+I know that it can be a little overwhelming, right?
+
+Because you see we have this very polished looking Figma design,
+
+and then you tab over to what you are given, and it's all jumbled and chaotic,
+
+and it can feel almost overwhelming, right?
+
+Like, where do we even start with this?
+
+Hopefully the fact that this workshop is broken into exercises helps with that a little bit,
+
+because we can ignore everything kind of below the top few pixels,
+
+because our first exercise, our focus is on this super header.
+
+So just this dark gray rectangle up here.
+
+By doing it kind of systematically from the top down,
+
+we can really like break this up into smaller manageable pieces,
+
+and that's how we're going to do it.
+
+So the first thing we have to do is figure out where this exists in the code.
+
+We could use the dev tools to do that, or I think I probably have it in the readme.
+
+I happen to know that it is the super header that we are looking for.
+
+And if we see how this is broken down, we have a wrapper,
+
+which is responsible for our styling, our background color, our color.
+
+And then we have four children that are all just kind of sitting side by side.
+
+If you're wondering why it breaks here, like why this button gets its own thing,
+
+well, that's because we have this unstyled button, which defaults to being display block.
+
+But that shouldn't matter once we move to a flex layout, right?
+
+It matters in a flow layout.
+
+So let's start by doing that, right?
+
+Let's add a display flex to our wrapper.
+
+With that done, we have transitioned into the layout mode
+
+that makes the most sense for this problem.
+
+And now we are faced with the next challenge,
+
+which is how do I take these three items and shove them all the way over here, right?
+
+Because we have kind of four siblings,
+
+and we want to make sure that we have a bunch of space between them.
+
+The way that I would have dealt with this historically,
+
+the way that I've kind of always dealt with this is by using nesting.
+
+So I may have come over here and kind of wrapped the marketing message in a div,
+
+and then I would have wrapped everything else in a separate div.
+
+And then I could have used justify content space between
+
+to kind of just take these two children and move them apart.
+
+And that works fine, right?
+
+There's nothing wrong with that.
+
+But it does create unnecessary markup.
+
+It clutters our dev tools.
+
+It adds more dom nodes.
+
+There is a way to do it without additional markup,
+
+which is always a good thing if you can swing it.
+
+So let's remove that.
+
+And instead, what I want to do is on marketing message,
+
+I want to say margin right auto.
+
+And when I do that, it solves our problem
+
+much the way that our kind of two pieces would have.
+
+The reason for this is that margin auto is a greedy value,
+
+and I'm putting it on the right side of this first child.
+
+So between this exclamation mark and the search icon, right?
+
+It's going to take as much space as it can
+
+from the leftover space that formerly was on the side
+
+and use it there, right?
+
+It kind of just pushes everything out of the way to consume that space.
+
+So that's how margin auto works in Flexbox.
+
+As I think I mentioned, it's like an actual part of the spec.
+
+It's not just a happy coincidence.
+
+So it's good that that works and we can solve our problem that way.
+
+Next, I want to kind of give everything a bit more breathing room, right?
+
+Everything is kind of very squashed and sardined.
+
+And the first thing I want to deal with is the height.
+
+And we could figure out what kind of padding would work, right?
+
+Find the tallest item and then add padding, like add the difference.
+
+But let's start by looking at the Figma.
+
+And we see that there's kind of this explicit 40 pixel height, right?
+
+That's the height that it wants to be.
+
+So let's just set it as that height.
+
+I'll pop over here and I will say height 40 pixels.
+
+And with that done, we introduce a new problem,
+
+which is now everything is all top aligned when we want it to be centered.
+
+So we can solve that using Flexbox.
+
+I'll say that the align items should be centered.
+
+It's aligned items because we're displaying flex items in a row.
+
+So the primary axis is horizontal and I want to center in the vertical axis.
+
+And with that, we have a nice amount of vertical spacing, right?
+
+Things look nicely spaced and they're nicely aligned.
+
+You may be wondering why not use baseline alignment.
+
+Presumably, I want the text over here to line up over there.
+
+It just so happens that because all of this text is the same size,
+
+we can get away with just using center because it is already kind of aligned
+
+if you do center alignment.
+
+Okay. Next, I want to solve the side spacing.
+
+So right now we have kind of this nice line running through our application
+
+that we are not respecting up over here.
+
+And we can figure out how to respect that by looking at Figma.
+
+So I will zoom into here and see that there is a 32 pixel gap on this side.
+
+And presumably it's the same on the other, but doesn't hurt to check.
+
+Yep. 32 pixels.
+
+So we will add a padding left of 32 pixels and repeat that for the right side.
+
+And with that, we have our nice alignment.
+
+We have equal spacing on either side and we have reduced it to a single problem left,
+
+which is these three items over here are all squashed together.
+
+We want to give them some space.
+
+This is where we have a divergence because if you don't have to support Internet Explorer
+
+and depending on when you're watching this Safari as I record this,
+
+Safari doesn't yet support the property that we're about to talk about,
+
+but it's been included in their technical preview.
+
+So it should launch any day now.
+
+We're going to use the gap property.
+
+So the way that that works is in our flex container, I'm going to say gap
+
+and I'm going to say whatever the number is supposed to be.
+
+Let's check.
+
+24 pixels.
+
+24 pixels of gap.
+
+And what that'll do is it'll give us 24 pixels between all of the children.
+
+It technically adds it between these children as well,
+
+but because margin is consuming that space anyway, it's not obvious.
+
+But that one property kind of solves this problem really, really nicely.
+
+Of course, if you visit this site on Internet Explorer and Safari,
+
+depending when you watch this, we won't have that gap and they will be squashed as sardines.
+
+But if you do need to make sure that the spacing is consistent between browsers,
+
+we'll look at how to do that too.
+
+The easiest way in this case is we have this help link,
+
+which is the middle item in these three items.
+
+So the way that I would do that, and we'll get rid of gap,
+
+is I would just say margin left 24 pixels and repeat it for right.
+
+So that works, right?
+
+It solves the problem in the same way.
+
+I'm essentially just forcing this middle item to push its neighbors aside.
+
+It may not work in every situation because it's not always so easy, right?
+
+This only works because help isn't its own component that I would have to like pass styles to.
+
+So another solution you could have used in a different circumstance would be to use a
+
+spacer component.
+
+And it just so happens I have one in this project.
+
+We'll look at it just super quickly to show it as an alternative.
+
+I will import that component.
+
+And essentially how it would work, you would just add a spacer with a size of 24
+
+between both sides of that, and then we'll remove the margin.
+
+And it has no effect.
+
+And just to kind of show that, you know, I always get a little skeptical when nothing
+
+changes on like maybe the hot reloader broke.
+
+So I'm going to change this to a much bigger number just so that we can see that it actually
+
+is working.
+
+And indeed, we see that when I do that, it spreads across.
+
+So the way that this works is that it adds a little span or div that will just take up
+
+that space, right?
+
+I'm giving it a prop of 24 pixels.
+
+So that's how wide it's going to be.
+
+So that's one way to solve it.
+
+As I mentioned, right, I've kind of gone through these in order of preference.
+
+I would love to just be able to use gap.
+
+If that's not an option, you can try to use margin.
+
+And if that's not something that's easy to do, you can use a spacer component.
+
+With that, I feel pretty good about our super header.
+
+So let's move on to the next part.

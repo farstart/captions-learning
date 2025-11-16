@@ -1,0 +1,53 @@
+So, for a very long time, I earnestly believed that you couldn't use sticky positioning within a flex container.
+
+And I believed that because whenever I tried to use it, it never seemed to work.
+
+But it turns out I was just falling into a very common trap.
+
+I was making a mistake that is very easy to mistake.
+
+And I have an example of that mistake kind of set out over here.
+
+So we can look at what's going on. I have a section class wrapper, which is a flex row.
+
+It has two columns. It has our navigation on the left and our main on the right with all these ridiculous photos.
+
+On the nav, I have already set position sticky top zero.
+
+And yet, when I scroll, the nav doesn't stick, right?
+
+So this on its face seems to suggest that sticky positioning doesn't work with Flexbox.
+
+But I think it's helpful if we add a border to this nav.
+
+So I'm going to say border solid deep pink.
+
+And what we notice is that the border on this navigation runs all the way to the bottom of the container.
+
+And this actually does kind of make sense when you remember that the default value for a line items is stretch, right?
+
+So when you have two siblings in a flex container, it stretches the shortest one.
+
+In this case, the navigation is much shorter.
+
+And then we remember that a sticky positioned element can only move within the scope of its parent container.
+
+And in this case, it has no wiggle room, right?
+
+It's already the full height of its parent, so there's no way for it to move up and down.
+
+We can change this. Like, what if we set our wrapper to have a line items of flex start?
+
+Well, when I do that, you see that our border shrinks to much more tightly surround the content.
+
+And then when I start scrolling, it sticks because now there's all of this wiggle room, there's all of this play.
+
+So that's really just the issue, right?
+
+It's by default, things will stretch and a stretched item has no room to be stuck.
+
+We can also like this feels like maybe a little bit of a heavy handed approach.
+
+You can imagine maybe if we had three or four columns, we wouldn't want to align all of them.
+
+So instead, we could use align self flex start so that we're only controlling the item that we want to stick.

@@ -1,0 +1,131 @@
+So here's something that almost feels like an urban legend but turns out to be true,
+
+which is that when CSS was originally designed, when the language was created,
+
+they weren't imagining people using it for layouts. They imagined that people would keep
+
+using tables in HTML for layout, and they would use CSS for cosmetic things like colors.
+
+And it took a long time for the language to catch up to how people were using it,
+
+and Flexbox, which is what this module is about, was the first intentional part of the language to
+
+deal with layouts. It's a different layout mode, so it's comparable to positioned layout that we
+
+saw previously and flow layout, which is the default. And the core idea with Flexbox is that
+
+it's a way to control the distribution of space along a single axis. So you have a bunch of items,
+
+maybe you want to have them in a single row. Flexbox lets you control how they're spaced,
+
+which ones grow or shrink, whether they line wrap onto multiple lines or not.
+
+And it's always with this lens of a single dimension, and it can be either. You can also
+
+have a flex column where things are laid out top to bottom, but you're always thinking in terms of
+
+how am I controlling these items along this primary axis, and then like as almost a secondary
+
+thought, you can think like how do they move in the cross axis? How do they move in the opposite
+
+direction? But it's really primarily about laying things out in a straight line in either direction.
+
+Now, Flexbox is an incredibly vast addition to the language. There are all kinds of obscure
+
+properties and things you can do with it. There are entire courses that exist just to cover
+
+Flexbox, and because this is only one module of many, we're not going to go that comprehensive.
+
+Instead, I want to focus on the practical things I use it for in my day-to-day development.
+
+As it turns out, I actually do use a pretty good chunk of the API,
+
+but we're not going to explore every nook and cranny and be totally comprehensive.
+
+Ultimately, I think this is probably a good thing because it's just one tool in our toolbox,
+
+and we're going to see the most practical, most useful things we can do with it.
+
+One of the most common questions I've gotten is when should I use Flexbox and when should I use
+
+CSS Grid? There's a related question, which is now that CSS Grid has pretty good browser support,
+
+has it made Flexbox obsolete? Should I even bother learning Flexbox? My answer to this is that
+
+Flexbox is as relevant as ever. It's a great tool, and one that I still use probably even
+
+more than I use CSS Grid. The truth is that they're different tools for different jobs,
+
+and it has to do with the number of dimensions we care about. If we are aligning things in a
+
+two-dimensional grid, imagine you have a header and a sidebar and a main content area, maybe an
+
+ad block and a footer. When you have specific chunks of two-dimensional blocks that you want,
+
+this is very, very much Grid's strong suit. Grid is very good, and we're going to see this in a
+
+future module, very good at putting things in specific boxes. Flexbox is always thinking in
+
+terms of one dimension, so if you have a nav with a bunch of individual items, if you have a vertical
+
+column with a bunch of stuff that you want to have control spacing and alignment, Flexbox is
+
+wonderful in these situations and it's not going anywhere. The other thing about Flexbox that makes
+
+it compelling is that it has universal browser support. It exists pretty much everywhere,
+
+including Internet Explorer 9 and 10 and 11, and CSS Grid is never coming to that browser, right?
+
+They've stopped working on Internet Explorer. Microsoft isn't maintaining Internet Explorer,
+
+so while that's going to be less and less a priority going forward, and honestly for myself,
+
+I've stopped supporting Internet Explorer years ago, for folks who still have to support it to
+
+some degree, it can be useful to have Flex in those situations. It's not going to be able to
+
+do exactly what you do with Grid, but ultimately our goal should never be to have identical
+
+experiences across browsers, but rather to have good experiences across browsers. So we have a
+
+whole module to talk about all of the fun stuff with Flexbox. Before we get started, I want to
+
+just at a very high level talk about what it is and what it does. So I have an example here.
+
+I have an unordered list with three items, and I've applied DisplayFlex to the wrapper. I've also
+
+just given, I mean we can even just remove this to see what it does. I didn't like how stuck together
+
+everything was, so I threw a bit of margin in just to make things a little bit nicer.
+
+And as I mentioned, Flexbox is a different layout mode. Technically it's called the flexible box
+
+layout, and the thing that's a little bit interesting about this is you apply the property
+
+to an element, and you're not changing that element's layout mode, you're changing its
+
+children's layout mode. So this wrapper element is still being arranged in flow layout. It's still
+
+a block level element because it's an unordered list. It's going to be greedy. It's going to take
+
+up all of the available horizontal space, right? All of the rules that we've learned still apply
+
+to wrapper. But then what happens inside wrapper changes? And specifically in this case, you'll
+
+notice I have these individual items, right? List items tend to be block level elements,
+
+but they're all sitting right beside each other, aside from the margin that I mentioned.
+
+So this is the first thing that we have to recognize, is that an element always exists
+
+in one layout mode and no more, right? Block level elements are greedy and will fill the
+
+available horizontal space when you are in flow layout, but if you take that same element and drop
+
+it into a flex container, that element is now being positioned according to the flexible box layout,
+
+and it changes how things work. So that's just one thing to keep in mind, that these layout modes
+
+are mutually exclusive, and that with Flexbox, applying display flex affects its children's
+
+layout mode and not its own layout mode.

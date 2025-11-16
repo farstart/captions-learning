@@ -1,0 +1,33 @@
+So in this exercise, we're asked to build a superheader, and we're given all of the
+
+markup that we need, but none of the styles. So looking at this, we can kind of plot our journey,
+
+which is that we're going to want to use flexbox, and we're going to want these two items to be
+
+moved to the far end. This text can stay where it is. So let's get started. We're going to add
+
+style for our header, and we're going to say display flex. When I do that, something a little
+
+unfortunate happens, which is that it automatically prunes out the naturally occurring white space
+
+between these inline elements. And actually, I kind of want that space, so let's re-add it,
+
+in effect, with the gap property, and I'll give it a gap of eight pixels. Next, I want to move
+
+these two items to the right, and there is like a little bit of a wrench thrown in our gears here,
+
+which is, in the example above, we did this by grabbing the first item and setting its margin
+
+right to auto. We can't really do the same thing here, though, because the first item is a text
+
+node, and we can't give a text node styles, but we can accomplish the same goal by using margin left
+
+on the second item. So I'm going to grab our label, and I'm going to say margin left auto.
+
+And when I do this, you'll see that it does move these two items to the right, and the reason is
+
+that, you know, this item's margin left occupies the exact same space that this item's margin right
+
+would, so it ultimately has the same effect of just causing this margin
+
+area to grow to fill the available space.

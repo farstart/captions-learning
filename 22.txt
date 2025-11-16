@@ -1,0 +1,131 @@
+So of all the exercises we've worked through together at this point, and there has been
+
+quite a few of them, I think this is one of my all-time favorites. And the reason I like it so
+
+much is that it really shows the benefit of getting a deep intuition for multiple layout modes in CSS,
+
+because when you hit the limitation of one mode, you can leverage another mode to solve what would
+
+otherwise be an impossible challenge. And this is indeed a very hard challenge. So let me first say
+
+that if you struggled with this one, that is absolutely okay. In fact, it's a good thing,
+
+because the struggle that you went through trying to solve this will actually increase the
+
+likelihood that you remember the solution that we're about to go through. It makes it stickier,
+
+and it means that long term, you'll have a much deeper understanding of the language.
+
+So whenever you find yourself getting frustrated or feeling like it's hard,
+
+just know that that is actually a very good sign that you are learning. When things are easy and
+
+you're not having any trouble, you're not actually learning that much. So just a good thing to keep
+
+in mind. And now let's talk about why this is such a challenging problem. So our goal with this
+
+challenge is to make it so that this first column dictates the height of the overall container and
+
+the parent, right, this pink border will shrink to fit the height of that first column. The second
+
+column will kind of grow to fit, right? It'll be as tall as it needs to to match the first column.
+
+But since we won't be able to fit everything, it'll show an overflow. And I think it's a natural
+
+first instinct to say something like, well, maybe I can tell the parent to just disregard the height
+
+of this column, right? Have this column grow to fit the height of the parent. And maybe you'll do
+
+something like where you'll say call last of type, get that second column exclusively and say height
+
+100%. And it would be great if this worked, but it doesn't. And the reason for that is the way
+
+the flex algorithm works, right? The parent is looking to its children to see how tall each of
+
+them are in turn, and then it'll grow to fit the tallest and then it'll cause all of the ones that
+
+aren't the tallest to stretch to fill the available space. So we have another one of those
+
+module one recursive impossible situations again, where we have a child asking its parent for the
+
+height and the parent asking its child for its height. So we can't do that, but we can do something
+
+kind of similar, which is what if I say the height should be zero pixels? Well, it looks kind of like
+
+it works, right, in terms of like our first column over here is dictating the height of the container.
+
+But if we inspect it in the browser tools, we'll see that we actually have a bit of a problem here.
+
+Our second column is just the height of its padding. It's only 32 pixels tall. And so if I
+
+was then to say overflow auto, well, now we have a very, very tiny column indeed doesn't really help
+
+us, right? But what if I took that overflow auto and I moved it to the parent? Well, now it looks
+
+right, like it looks perfect. But then when I start scrolling, it all kind of falls apart.
+
+And it makes sense that both of the columns are scrolling away because I put overflow auto on the
+
+parent. And so as I scroll one of the columns, they both move up. And this is where the whole
+
+leveraging other layout modes things comes in. Because having a single column kind of float and
+
+stay stuck in place while the rest of it scrolls. Well, that sounds a lot like position sticky,
+
+doesn't it? So what if we target just our first column, first of type, and I can add position
+
+sticky top zero. Now when I start to scroll, this first column stays stuck in place and we only
+
+scroll the second half. And this works even as we change the size of the viewport. We have this kind
+
+of melange of mechanisms working to our advantage here, where we have this list is going to grow as
+
+tall as it needs to, but it's not going to affect the height of the container because we gave it a
+
+height of zero pixels. So the height of the container is dictated by this first column.
+
+But then the whole parent has overflow auto so we can scroll to show the height of the second
+
+column. But then we have sticky positioning on top of that, which locks this column in place.
+
+Now, I know that many folks who are watching this are probably feeling a little discouraged
+
+because all of these mechanisms stacked one on top of the other. Maybe you're thinking something
+
+like you could have given me a thousand years and I never would have come up with that, right? It's
+
+kind of like out of left field. Like how do you even know to think about position sticky? And for
+
+this, I promise you that is a normal and natural part of learning. It's not going to be intuitive
+
+till you have a bunch of practice with it. So as you get more and more deep into this stuff,
+
+and as you work and spend more and more time working with them, eventually you just get this
+
+collections of very, very intuitive tools. And when you encounter a new problem,
+
+like when I saw this problem initially, I had three or four ideas pop into my head
+
+and then realize that like, oh, this idea wouldn't work because of this other constraint.
+
+My initial solution to this was actually different. I initially had this first column.
+
+I set it to have an inner element that was absolutely positioned and that worked as well,
+
+but it was a little bit more complicated. But the point is that as you get more and more experience
+
+with this stuff, you start to just think of solutions automatically just because you have
+
+that level of intuition. And I promise you that you will get there with enough time.
+
+I also think it's worth mentioning that I came up with the kind of two solutions I mentioned,
+
+but that's not to say that those are the only solutions. There's probably many ways that I
+
+didn't think of because those just aren't tools that come intuitively to me. So if you solve this
+
+in a different way, please do share it with me or share it with all of us posted in discord,
+
+because I think it can only help to have the number of tools in our toolbox
+
+grow as we learn tips and techniques from each other.

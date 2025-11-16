@@ -1,0 +1,77 @@
+So in the very early days of CSS, there was one particular layout that was everywhere,
+
+and really sought after, really common, but also really hard to build in a proper, robust way,
+
+really elusive. And that layout, because of these properties, was called the Holy Grail layout.
+
+It was the layout that was every website was trying to do it and failing in some way,
+
+because the tools of the time made it really hard to do this properly.
+
+And this is what it looked like. It had a header which spanned the entire height,
+
+a footer that needed to be stuck to the bottom of the viewport, and then a main content area
+
+that had three columns, with a navigation unit on the side, an ad unit on the opposite side,
+
+and then all the actual content in the middle. And this image, by the way, is from Wikipedia.
+
+It was such a common layout that there's even a Wikipedia article on the Holy Grail layout,
+
+which is kind of remarkable. And now our goal is to reconstruct that idea using Flexbox.
+
+And there's nothing, I don't think there's any particular issue with this,
+
+but it is just a matter of like stacking those bricks and getting practice with these ideas.
+
+So let's do it. The first thing to make sure is that your markup is structured in a way
+
+where you're able to have kind of two separate flex containers, because we can't really do this
+
+kind of fancy 2D layout with Flexbox. We can with grid, but with Flexbox, we can only have a row
+
+or a column, right? In this case, we have a column that has three children, header, all of this main
+
+stuff and footer. And then all of this main stuff is a row with three columns. So the first thing to
+
+make sure is that the markup is structured correctly. And in this case, it is. So let's
+
+start with doing our outer container. So I'm going to say that our parent wrapper should have display
+
+flex. It should, however, have a flex direction of column. And we also want to make sure that it
+
+spans the entire height of the viewport. And we could do this with the HTML body height 100% thing.
+
+I'm going to do it using viewport units, which I know we've discussed have their own tradeoffs,
+
+especially on mobile. But feel free to substitute your own solution for that problem. Next, I want
+
+to start dealing with the fact that this kind of section needs to grow, right? Because nothing
+
+really looks different. And it's because this flex column has a justify content of flex start, right?
+
+If I really wanted to, I could say justify content center, and then all of the things would move.
+
+But what I want really is for the header to say at the top, the footer to say at the bottom,
+
+and the main content area to stretch. So let us then go to our middle element, and let's say flex
+
+one. And when I do that, happily enough, our main content area now spans to force the footer to sit
+
+at the bottom. But we also want this middle element to be a flex container of its own. So we'll say
+
+display flex. And similarly to last time now, we have our three children that are stacked at the
+
+front of the container, right? It's the left side because we have a row, just like it was the top
+
+when we had our column. So let's reach into that row, and let's grab main, and let's give it flex
+
+one. The problem wasn't actually specific in terms of should these sidebars have a specific
+
+minimum size or proportion. I suppose the right thing to do in this case would be to use proportion.
+
+So maybe we'll say that our nav and our aside each take up one-fifth of the total space,
+
+and this middle column takes up three-fifths. Regardless, though, we've had enough practice
+
+with that particular problem. And this is our holy grail layout.

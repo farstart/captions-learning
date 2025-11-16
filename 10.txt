@@ -1,0 +1,111 @@
+So in the last lesson, we saw how flex grow allows you to take additional space like this empty space
+
+over here and distribute it between the children. So for example, if I grab this first child and I
+
+give it flex grow one, it's going to receive all of that extra space and grow accordingly.
+
+If I give this other child, right, its sibling, let's also give it flex grow one. Well now these
+
+two children are sharing that space evenly, but they're not exactly the same size, right? Like this
+
+one is, let's check, 205 pixels. This one is 227, right? It's 20 something pixels larger and that's
+
+because the content is actually bigger. But what if we wanted these two columns to be the exact same
+
+size? And really this is a much more common situation where you'll have one column that has
+
+a whole bunch of stuff and another column that doesn't have very much and you want them both to
+
+take up an equal amount of space. In this case, this column is so big that flex grow doesn't do
+
+anything, right? If I set flex grow to one, no effect because there is no extra space.
+
+If you've been using Flexbox for a while or if you've even followed a couple tutorials,
+
+you probably know that the way to do this is flex one. And if I apply that to both of these columns,
+
+let's give them both flex one, we get what we expect, which is this column is going to be
+
+361 pixels, this column is going to be 361 pixels. But what is this shorthand? What is flex one? I
+
+think a lot of people think that it's just a shorthand for flex grow, but we've seen that
+
+that's not true, right? Because flex grow doesn't do anything in this situation. And this is probably
+
+one of the most misunderstood things about Flexbox. And honestly, it's a shame because it's a really,
+
+really cool thing. Just to jump into how it works, let's let's reconstruct this without
+
+the shorthand. So I'm going to go and say flex grow one, and I'm going to do the same thing on
+
+its sibling. Flex grow one. Now, what do you suppose happens if I set both of them to have
+
+a width of zero pixels? So I'm going to say width, zero pixels, and that makes it shrink
+
+to almost nothing, right? Other than its padding. If I get rid of its padding,
+
+it completely disappears because it's zero pixels wide, which makes sense. But now I'm going to come
+
+to this one, and I'm also going to say width, zero pixels. And now I get that effect of them
+
+taking up an even amount of space. I think it would be interesting if you want to pause the video and
+
+just think about this for like 30 seconds. See if you can puzzle out why setting width zero has this
+
+effect. This is me giving you time to pause. Okay, the reason that this works is because
+
+width controls the hypothetical size, right? Remember we talked about there's this hypothetical
+
+size. If they're both set to zero pixels, then all of the space is available space, right? Because
+
+this one is zero pixels wide, and then this one is zero pixels wide. In the hypothetical,
+
+which means that we have 100% of the space is available, and then flex grow takes half of that
+
+space for each child, right? So by setting width zero, and actually what the flex shorthand actually
+
+does is flex basis, which again is the same thing. It allows it to consume half of the available
+
+space, and it makes all of the space available. So it's really kind of a clever workaround. And
+
+honestly, this is the way that this property is used. That's why the shorthand is so omnipresent,
+
+because this is the behavior we usually want on the web. But I think it's important to know
+
+that it's not the default behavior of flex grow, right? The mechanism works differently,
+
+and this is kind of a workaround to get it to do this thing. But that dissonance between what
+
+most people think flex grow does and what it actually does is the source of a lot of confusion.
+
+So I know that we've taken kind of a roundabout way to get here, right? The whole last lesson was
+
+really just like going down this road of having everything be proportional, even though that's not
+
+how we usually use it. But I hope you'll agree that it's a worthwhile journey to take, because
+
+now hopefully you have a much deeper understanding of how all these properties work.
+
+And the specification actually recommends that people use the shorthand. So going forward,
+
+we're going to use flex as a shorthand rather than flex grow and flex shrink, because it does
+
+do the basis management automatically. When you say flex one, what you're actually saying is flex
+
+grow one, flex shrink, I think is one as well, and then flex basis zero pixels. There's a graphic
+
+that I found in the flexbox documentation that explains this really well, which is,
+
+if you set flex basis to zero, it distributes all of the space. So if this one is flex grow one,
+
+this one is flex grow one, this one is flex grow two, then you see there's four equal chunks,
+
+and this one gets two of them. If you set flex basis to auto, which is the default value if you
+
+don't use the flex shorthand, then it's only distributing the extra space. So this short one
+
+is getting twice as much of the extra space, but you'll see that this element is almost the
+
+same size as this one, even though its flex grow is twice as big. So that's the important takeaway,
+
+hopefully it makes sense, and I'll let you go on to the exercises.

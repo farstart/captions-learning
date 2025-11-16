@@ -1,0 +1,97 @@
+Okay so this is a fun challenge and I think it's interesting because there's a number of ways that
+
+we could solve it and I don't think there is like a right answer but I do think that we can come up
+
+with something that feels pretty darn good. So just to revisit what our problem is we have these
+
+three items that are currently being aligned based on their baseline so that the bottoms of all this
+
+text lines up and they're sitting within a container that has extra vertical space and we
+
+want to center these items as a group within that space. So the way that I've solved this for a long
+
+time my go-to method for this is to use line height and line height is a little interesting
+
+we're going to talk about it more in our typography module but when you add a line height if I make it
+
+like let's just say really something outrageously big it's going to center that text within that
+
+space right if the line height is really big the text is always going to be centered within it
+
+so if we set our line height to equal the height of our container we kind of get the centering for
+
+free and we're centering the h1 which is the tallest item in our list which means that the
+
+other items are going to pick their placement based on the baseline of that first item. So this
+
+works but it does feel a little inelegant partially because when you select the text you can see that
+
+like your selection is this enormous box it also doesn't do us any favors if we happen to have
+
+multiple lines so if this became Tommy's barbecue well now each line is the full height of the
+
+container. So let's scrap that and let's take a step back and think about how else we could do
+
+this because we have this ul which is currently not super tall and it exists within a nav so what
+
+if we make the nav a flex container as well so I'm going to say display flex and of course it's
+
+going to default us to a row which isn't what we want let's make it a direction column this
+
+kind of resets us to where we were but now we can align stuff within that so I'm going to say
+
+justify content center and I'm using justify content because we've set a column here right so
+
+our primary axis is the vertical one and that's the axis I want to center along now I recognize
+
+that if you're not used to thinking about flexbox in this way it can be a little strange to see
+
+nested flex boxes like this right we have a flex box on the nav and on the ul but they both serve
+
+different purposes our ul's job is to figure out the horizontal placement right spacing items
+
+with even spacing and then also to do the baseline alignment but then this whole group
+
+is going to be vertically centered using the parent flex box there is one last thing I want
+
+to talk about and it is out of scope for this module so if you'd like feel free to skip this
+
+we'll come back to it later but I feel like it must be pointed out because I know that some folks
+
+will be bothered by it and it's the fact that even though this is centered technically speaking
+
+right if I select the text you can see that this space appears to be equal to this space
+
+when I don't have it selected it doesn't actually feel centered it feels like it's too low
+
+and part of that is because these items over here are being aligned to this one's baseline
+
+which means that this space up here is way bigger than the space down here it also is a matter of
+
+the fact that typography in general leaves more vertical space like this space is bigger than this
+
+space so even though this is mathematically centered it is perfectly fitted doesn't look
+
+right and optical alignment is the idea that we sometimes have to cheat a little bit and pull
+
+something out of an actual aligned a mathematical alignment so that it looks right to our eyes
+
+the way that I'm going to do this here is I'm going to use negative margin so on my ul I'm
+
+going to say margin top and just kind of pick negative numbers and see how they feel right
+
+minus four maybe minus eight that feels all right maybe a little bit too much right if I make it
+
+minus 20 then it's going to be way too much maybe minus six is the right number in this case and
+
+there really is no formula for this right I suppose maybe you could like try to figure out
+
+what you want to anchor to and maybe this distance needs to be the same as this distance
+
+but really it's just about trying numbers and trusting your intuition and just looking at it
+
+and seeing if it feels right or not we're going to talk much more about that in the future
+
+ultimately the goal for this little exercise is to talk about nesting flex boxes and how to
+
+think in terms of two dimensions even with xbox

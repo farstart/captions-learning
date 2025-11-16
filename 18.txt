@@ -1,0 +1,109 @@
+So in an earlier lesson we talked about how justify content can be used to control the
+
+distribution of items along its primary axis, but honestly this control feels pretty coarse to me.
+
+It doesn't give us a lot of like fine-tuned control over the placement of individual items,
+
+and I'll show you a situation where it doesn't really work.
+
+So I have, you can imagine, a site header over here that has three children,
+
+it has the site logo, and then it has two buttons, and what I want is for these two buttons to move
+
+to the opposite end, and the way that I would have solved this for a long time is I would have
+
+wrapped the two buttons in its own element, because if I do this, I've effectively reduced
+
+a three-child flex wrapper to a two-child flex wrapper, and then I can use justify content
+
+space between, and honestly this works, it's just not the ideal solution because it clutters
+
+our markup, and not that that's the end of the world, but it would be nicer if the markup didn't
+
+have to have these extra divs just for flexbox stuff, and it turns out there is actually a way
+
+we can do this, and that way is to pull a trick out of our hat that we last saw a couple modules
+
+ago, and that trick is auto margin. So on my logo, this element here, I'm going to add a margin
+
+right, and I'm going to set it to auto. The last time we saw auto margins, they were used to center
+
+an item, and the reason that worked, right, is if you set margin left auto and margin right auto,
+
+it's like a greedy value, so it's going to eat up all the extra space, and as a result of doing
+
+that, it kind of forces the item into the center. It's a very similar mechanism here, where we're
+
+saying margin right auto, and auto is a greedy value, so it consumes all of the extra space
+
+in this flex container, and puts that into its right margin. This isn't like a happy coincidence,
+
+either, it's not that this just happens to work, this is actually in the flexbox specification,
+
+and it's how the language authors wanted you to solve this problem. So this is actually a
+
+really nice solution to this problem, and it's something that a lot of folks just don't know,
+
+I didn't know about it for the longest time. So I feel good about this, but I have one other
+
+challenge I want to address in this little problem, which is my two buttons that are sitting over here
+
+now, they're all smushed together, right, they're uncomfortably close to each other. What if I want
+
+to add like eight pixels of space between them? So there is a new property that can help us with
+
+this situation, and it's called gap. So I'm going to set a gap of eight pixels, and when I do that,
+
+what it does is it adds a gutter between each flex child. Crucially, it only adds them between
+
+children, so it's not going to add it kind of on the outside edges, which makes this a really,
+
+really great tool, but it does have a drawback. And that drawback is that it's a little bit too
+
+new for its own good. This is pretty cutting edge stuff, at least at the time that I'm recording
+
+this, February 2021. It exists in most major browsers, but it's not yet in Safari. It has
+
+been included in their technical preview, so it should come any day now. It doesn't exist yet,
+
+though. It also doesn't exist in Internet Explorer, and unfortunately, it's never coming
+
+to Internet Explorer. Before abandoning this entirely, I think it's worth considering what
+
+it means to support Internet Explorer. I think in many cases, it's actually all right if your
+
+buttons are uncomfortably close to each other in an older browser, right? Browser support doesn't
+
+necessarily mean that every browser has to be identical in appearance, it just means that it
+
+has to work. So I actually think there are cases where you can use this even if you need IE support,
+
+but let's also look at an alternative if you really just, you have to have consistent spacing.
+
+So looking at the kind of the situation that I have here, it occurs to me that we can use margin
+
+for this as well. So in these off buttons, what I'm going to do is I'm going to say margin left
+
+eight pixels, because that adds margin kind of right over here, and it adds margin right over
+
+here, which doesn't really affect us at this size, but we can imagine that being useful
+
+when it gets a little bit smaller. So that's useful, but of course, it can be tricky because
+
+maybe this component is defined in another file without easy style access. I'll leave one more
+
+little trick you can use in certain situations as well, and that's to use a spacer component.
+
+So I'm going to add say spacer here with a size of eight, and the idea is you would define this
+
+as a component that would then set this value to be say a min width, and I can just do like a very,
+
+very quick version of that. I'll do it just with styled components, even though it can be worth
+
+making this an actual component, make it a styled div, and I'm going to set the min width to be
+
+props dot size pixels. When I do that, and when I get rid of my old margin, we can see that this
+
+little tiny div is just eight pixels wide, and I use min width for the very specific reason that
+
+I don't want it to shrink if we run out of space because I think that the spacing should be consistent.

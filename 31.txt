@@ -1,0 +1,195 @@
+So this last part of the workshop feels a little bit different, has a bit of a different flavor
+
+from what we've been doing so far. Because so far our goal has been to add flex specific properties
+
+uh without really doing much in terms of markup and without really revisiting much from the past
+
+this one things change. In this challenge our goal is going to be to do two things
+
+to add a sale price and to fix the prices in general and then also to add a flag if the item
+
+is either new or on sale. And for both of these things we're going to have to reach back into
+
+past modules to solve it. So I think we should start with the price and we can take a look at
+
+what code we have. Inside our shoe card we have something that we haven't touched on yet which
+
+is this variant constant not being used yet. Essentially this is how we tell which variant
+
+the card is and there are three. There's the default, there's whether it's a brand new release,
+
+and there's whether it's on sale. And for the purposes of this exercise we can assume that
+
+these are mutually exclusive categories so a shoe isn't going to both be new and on sale.
+
+If we look at how this is implemented we have a row component and this row has both a name and
+
+a price this row only has a color but the row isn't really doing anything in terms of layout.
+
+So let's change that with our historical opening of display flex and when I do that our price
+
+scoots up and sits beside our title but it sits way too close so let us also add justify content
+
+space between. Seems pretty good. We also if you notice we have this sale price element and we
+
+can check and see right it's not being used. If you use VS code you may have this little
+
+underline telling you that it's not being used. Let's use it. So inside the second row we can add
+
+sale price and have it be equal to sale price
+
+which is a prop that we get in this component. But of course when I do this
+
+a problem pops up which is that it is this incredibly expensive sale price. It's not
+
+formatted. Thankfully we do have a little helper. Format price exists over here so we will wrap it
+
+around that. There's also the technical matter of I probably don't want to render a sale price
+
+at all if it's not on sale so we can wrap that behind a little guard. We can say if the variant
+
+is equal to on sale render that otherwise don't render anything.
+
+And if I do that we see that now we have this nicely formatted sale price and the other elements
+
+that aren't on sale don't have anything at all. By the way I know that this is uncomfortably tight
+
+but this gets into an area we're not ready to talk about yet in the typography module. We will
+
+see how to solve situations like this. For now though there's one more thing we have to do in
+
+terms of the price and if we notice in our design the not for sale price, the regular price on a
+
+sale item needs to be both gray and stricken stroke needs to be crossed out. We can also see
+
+in Figma that the color that we want is gray 700 so let's start by figuring that out and this gets
+
+into what we were doing last module which is this price now has to have a color change depending on
+
+whether it's on sale or not. So I'm going to add a style tag and I'm going to add a new CSS variable
+
+called color and the idea is that if variant is on sale well then it should be colors.gray and we
+
+want the 700. I'm forgetting now which spelling of gray I used but aha I used it with an a so
+
+let's change that. Whereas if it is not on sale I'm just going to pass undefined. I mean I could
+
+pass the black color or whatever but it seems to me that ideally we would just not set a color and
+
+let it do whatever is done by default. So I also need to then use this so let's go down into our
+
+price and we will set the color of this equal to the value held in the color variable.
+
+When I do that you'll notice that this shoe over here and this one over here become this light gray
+
+whereas the other shoes are left unchanged. We also need to do the strikethrough effect and I
+
+will just let you know that to do that it is text decoration line through. This is also something
+
+we'll see in a future module but I don't want to do that for all the prices. I only want to do that
+
+for sale ones so we'll repeat the process. I'll add a variable of text decoration
+
+add text decoration and if the variant is on sale well then we will have line through be applied
+
+and with that we have our very nice line through text when the shoe is on sale and we can focus
+
+now on the flags. So in our design we have flags for both non-default variants right so like if
+
+the shoe doesn't have anything special no flags at all but if it's new newly released it has this
+
+just released flag and if it's on sale it has this other flag and the colors for this are primary for
+
+sale and secondary for new so I'm going to create a new styled component because we don't have that
+
+yet and I'm going to call it flag it's going to be positioned absolutely and for now I'm going to
+
+stick it in the top right corner I'm going to give it a background of red of course this will
+
+have to change but I'm just getting getting started for now and then I'm going to try putting it
+
+inside the image wrapper right after the image and I'll just say sale and if we see that we do
+
+indeed have this red sale much to be done still but I'm encouraged by this early sign of progress
+
+so let's go back to the figma and let's take a look and see exactly what kind of properties this
+
+flag has so I notice right away that it has a height of 32 pixels the text has an inner padding
+
+of 10 pixels on each side and it's bold text size 14 so let's add some of those things I will say
+
+that it needs a height 32 pixels padding of 10 pixels on each side font size should be
+
+14 divided by 18 rems and what was the last thing font weight was bold and if we check our constants
+
+we see that bold well we can actually just import this and use it and it is imported so that's good
+
+we will have it be weights dot fold we also want to add a line height that matches the height
+
+otherwise our text will never be centered and that's looking all right I also noticed that
+
+there's some clever positioning here right where it's actually not quite at the top and it actually
+
+sticks out the side so instead of having top zero I'll have it be 12 and instead of right zero I'll
+
+have it be minus four pixels next up we should talk about color and this one is a little bit
+
+interesting because we have two different kinds of flags we have the sale flag and the new release
+
+flag and we could do this much the way that we dealt with the color of the price before but we'll
+
+see that it's not necessarily the best way to do it so let's quickly go through and we'll say color
+
+is the value of color then I'd have to come up here and I would have to say essentially okay
+
+so first I need to determine if I even have a flag right so I would I guess I could say
+
+variant if it's equal to on sale or if the variant is equal to new release if either of these
+
+are true then render this flag and then the flag color would be dependent on that value right so
+
+we would say dash dash color if variant is equal to on sale then it would be colors dot primary
+
+otherwise it would be color dot secondary this just looks like a big mess to me and it's totally
+
+valid we could maybe improve it by pulling this into a variable called like has flag right like
+
+there are ways we could clean it up but I think there's actually a better way and the better way
+
+uses the composition feature of styled components so I'm going to say if the variant is on sale
+
+then we will render a sale flag with the text on sale because that's another thing too we would
+
+have to have another ternary inside for the actual text if the variant however is new release then
+
+we're going to have new flag with the text just released I think that was the text no it's just
+
+sale and just released with an exclamation mark of course these components don't exist so I'm
+
+going to have to go down here and I'm going to compose this flag I'm going to say
+
+a sale flag is equal to a styled flag
+
+and it's going to set a background color of colors dot primary
+
+and repeat this process for new flag
+
+but the background color will be secondary and before I forget
+
+I need to change the color of this to be colors dot white when I do that we'll see that we have
+
+this purple just released flag and this red sale flag and they each have their own colors and what
+
+I like about this is in the markup it just feels so much cleaner and we know that it'll work right
+
+because both of these can't be true variant can't be equal to on sale and new release and if it's
+
+neither of them we don't get either of them so ultimately this is kind of subjective right like
+
+pick whichever solution works best for you but I certainly think this is a good way to go I think
+
+finally the only thing I'm forgetting is the border radius which is two pixels which is a subtle but
+
+important touch so I will say border radius two pixels and with that I feel pretty good
+
+about where we landed on this exercise

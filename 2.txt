@@ -1,0 +1,147 @@
+so hopefully you remember if we think all the way back to module one that we talked about the
+
+cardinality in flow layout where you have a block direction and an inline direction and block elements
+
+and inline elements and each direction carried its own set of rules so for example a block element
+
+would be stacked in the block direction and it would be greedy in the inline direction so a block
+
+element would expand to fill the available horizontal space whereas an inline element
+
+would be placed along the inline direction but would be very very lackadaisical and very go with
+
+the flow right water off a duck's back flexbox has the same kind of idea in terms of having two
+
+different directions but the big twist that flexbox brings is that you can flip what those directions
+
+are for every given container they're nowhere near as locked in as they are with flow layout
+
+so i can show you what i mean here i have a container that holds four items and the only
+
+css i've applied is i've put display flex on the container and then i've also given the container
+
+a fixed size so it has a fixed height and width and what we can notice is that the items are all
+
+stacked right up at the front which immediately is a little bit strange for block level elements
+
+but then they're also stretched for the available horizontal space and i'm going to toggle on so we
+
+can see the labels in this case because this is a flex direction row which is the default value
+
+items will be placed along the horizontal axis they're going to be placed in a single row
+
+is how you read that and they're all kind of sitting right up at the front of that axis right
+
+they're at the left edge of the container and since this is the primary axis it's the front
+
+of this axis meanwhile in the cross axis they're kind of stretched across the axis and the cool
+
+thing about this is i can flip the direction so if i now set flex direction column and make our
+
+container a little bit bigger we can see that the same rules apply except now our axes have been
+
+rotated so they're still at the front of the primary axis right the top of the container
+
+and they're still being stretched across the cross axis and this is really there's a really nice
+
+symmetry with this where for almost everything if you learn how to do something in one direction you
+
+can apply that knowledge to do it in the other direction which is really really cool and i think
+
+one of the undervalued aspects of flexbox this behavior where it stretches across the cross
+
+axis and sits at the front of the primary axis is configurable so i have another one of these
+
+little demo units but now i have a couple other controls and i will warn you now it takes forever
+
+to remember which is which between justify content and align items they didn't do a great job naming
+
+them but it will eventually stick with enough practice so these are the default values justify
+
+content flex start align items stretch and justify content is for the primary axis align items is for
+
+the cross axis or secondary axis i can change flex start to flex end and notice now that things
+
+move to the end of the primary axis you might wonder like why call it flex start and flex why
+
+not just left and right and the reason is that again it's the same rules when you rotate so when
+
+i'm in this vertical configuration flex end would be the bottom flex start would be the top right
+
+because things move from top to bottom and from left to right in their respective axes when it
+
+comes to aligning items i can also use flex start and flex end and you'll notice they function kind
+
+of the same way so if i set flex end to both of them i'm at the bottom of the primary axis and
+
+the right of the cross axis right i'm as far away from these labels as i can get you'll also notice
+
+that the values they hold aren't the same so they share these three they share flex start flex end
+
+and center which makes sense right i can center things in either direction or move them to the
+
+left or right or top or bottom but then they each have their own different options so for example in
+
+justify content we have this interesting value space between and the idea with space between
+
+is that it pushes the items to be as far away from each other as possible to try and increase
+
+the gap between them as much as it can so of course this is going to depend on the container
+
+and if the container is too small then it won't have any effect right if i if the container is
+
+too small none of these things have any effect because there just isn't enough space for them
+
+but that's essentially how it works is it increases the space between the items if there
+
+is leftover space now why isn't there an align items space between well it makes sense if you
+
+think about it because in this given configuration i have multiple items that share the same like
+
+position in terms of the primary axis right the primary axis is a row and i can draw a line through
+
+that row that intersects all four items i can't do the same thing in the cross axis though right
+
+like i can't draw a vertical line that cuts through multiple items so what on earth would
+
+it mean to set align items space between there's only one item in every given column for example
+
+now this isn't always true in a few lessons we're going to talk about wrapping in flexbox
+
+but this is fundamentally why which is generally speaking you don't have that overlap in terms of
+
+cross-direction axis and so it doesn't really make sense to be able to put space between things
+
+similarly you might wonder why there's no justify content stretch and that's a great question and
+
+one that we're going to explore a little bit later suffice it to say that there is a better
+
+way to do what you might want to do with justify content stretch the last thing i want to touch on
+
+is just these three options we have justify content space between space around is similar
+
+and the way to imagine this is imagine you put like a block a box around each child and put
+
+equal padding within that box on the left and right so each item kind of has this invisible box
+
+and it's creating that even spacing what this means in practice is that there is twice as much
+
+space between items as there is to the outer container this can be useful if you have like
+
+a nav menu on mobile and you want to have three icons right that's kind of i think when i've used
+
+this property before justify content space evenly is similar but with one slight difference which
+
+is now the space between the edge of the container and the item is the same as the
+
+space between items you have five equal chunks of space around the items the one last little
+
+thing to note is that all of the properties we've seen so far exist in internet explorer
+
+but justify content space evenly is the newest of the bunch and doesn't enjoy i.e. support so
+
+if you do need to support i.e. i would stick with space around when it comes to baseline well
+
+actually this is something that warrants its own little discussion and that is going to be
+
+the subject of the next lesson

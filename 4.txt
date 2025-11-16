@@ -1,0 +1,81 @@
+All right in this one we have a yellow circle inside I guess a mauve you might call this color
+
+mauve backdrop and our goal is for this circle to sit in the very middle of the space both in
+
+horizontal and vertical directions so I don't really have a container right once again there
+
+are some baseline styles we have the body tag it feels a little funny to me to start putting
+
+flexbox stuff on the body so I'm going to start by saying let's add a wrapper to this one
+
+next let's start styling that wrapper so we can start the same way as we did last time display
+
+flex and we're going to hit a problem but I want to hit it by following what might be a reasonable
+
+intuition which is if I want to center things horizontally right it's still again a flex row
+
+so horizontally would be centering it along the primary axis so I can use justify content center
+
+that works just fine and then for the other axis you would use align items center
+
+you'll notice it doesn't work and we can figure out why it doesn't work by poking at this in the
+
+dev tools and what we discover is that our wrapper is only 40 pixels tall because we can only center
+
+something within a container and this container is following all the same rules of flow layout
+
+that's why I mentioned that when you set display flex you're changing the rendering the layout
+
+mode of the children but you're not changing the layout mode of the parent so we have a number of
+
+ways we can solve this problem and we've seen some of this before if it's not important for
+
+it to be centered right out of the gate on mobile well then the easiest way to solve this would be
+
+to set a style of min height 100 viewport height units I close this we can see that in that case
+
+it'll work just fine because now our wrapper is the entire height of the viewport but this solution
+
+has that caveat which is on mobile devices the vh unit represents the maximum size of the viewport
+
+and when you first load a page on mobile the address bar is bigger you can see the current
+
+address there's usually a footer bar that contains the back button right as you scroll a page all that
+
+stuff slides away and the viewport gets bigger that bigger size is what vh units target so when
+
+you view this on a mobile device it's going to be sitting a little bit lower than you would expect
+
+because the container is actually taller than the available space you're even going to get a scroll
+
+bar so if that is a deal breaker for us we have to fall back to another solution and that other
+
+solution involves setting percentage heights on all the containers and I've already explained this
+
+so we're going to move pretty quickly I'm going to set height 100 on html and on body and then on
+
+the wrapper I can change this to be a percentage and you'll see I have exactly the same result
+
+on desktop because on desktop percentage and vh in this unit in this context are the same but you'll
+
+notice if I remove this style let's maybe change it back to auto well then it falls back to the same
+
+problem the reason for that is that this percentage sign right it's a percentage of its parents height
+
+wrapper's parent is the body tag and body doesn't have a height so body is trying to figure out how
+
+tall it should be based on its children and its child is saying it should be 100 of its parent
+
+right there's this recursive thing happening so that doesn't work in order to get it to work we
+
+have to set both the html tag and the body tag to be 100% and the reason this works is that html
+
+doesn't have a parent right that's the very top and so it has no choice but to fall back to the
+
+viewport height this little curiosity aside hopefully these two properties together make
+
+you kind of breathe a sigh of relief because it becomes so much easier to do vertical centering
+
+than it used to be back when we used to have to come up with all kinds of clever hacks to do it
+
+and that's that's our solution

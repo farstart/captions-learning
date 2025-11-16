@@ -1,0 +1,81 @@
+So in this exercise, our goal is to improve the tab ordering so that people who use a keyboard to
+
+navigate have an easier time of it. And it's kind of a fun exercise because we're not changing
+
+anything visually, we're just trying to like enhance the usability a bit. So the way that I
+
+like to test this is you can start by double clicking this result to make sure that something
+
+is focused just outside this iframe and then when you press tab it'll move into the iframe
+
+and go through the items in order so you can keep pressing tab and it'll go through them one by one.
+
+I should say that like the way that I would normally do this is if you start by selecting
+
+the address bar and press tab it'll move you into the document in much the same way but because
+
+in this kind of artificial playground environment we have this iframe you get best results by
+
+starting by selecting the word result and then tapping through. And when I do that we notice
+
+that it starts by grabbing this first link and then this link right we're moving through the
+
+article's content and then eventually we get to the table of contents but that doesn't do you a
+
+lot of good when you've already made it through the entire article. So there are a couple of ways
+
+we can do that and one of the ways that we haven't talked about but maybe you're familiar with
+
+is the tab index property. So I can come over here and say tab index equals one
+
+and do the same thing for these and essentially what I've done then is I've prescribed a specific
+
+tab order so that when I repeat the process well we go through this one because it's had its number
+
+one then this one is tab index two then three and then it goes through all the other ones that don't
+
+have an assigned tab index order. So this it solves the problem but it feels a little clunky to me and
+
+in fact it's it's generally advised not to do this. The reason is that it becomes a maintenance burden
+
+where it almost it's like z-index right like you have the same problem of these ever increasing
+
+numbers it's hard to manage it's easy to make mistakes and to actually make the experience much
+
+worse. The only time you should be setting a tab index is if you're going to set it to negative one
+
+and when you set it to negative one it essentially removes that item from the tab index so now I
+
+actually I can't can't select this first heading. You may think why on earth would you want to do
+
+that? Well there are rare cases where that is a desirable thing. One example might be if you have
+
+like a thing you want to be clickable but it really should only be clickable maybe it's just
+
+like a fun little whimsical flourish that doesn't really make sense for keyboard navigators.
+
+In rare cases like that it can make sense to explicitly remove something from the tab index
+
+but the general wisdom goes that you should never set it to a positive number. So then how do we
+
+solve this problem if we're not using tab index? Well the other way that this works is by using
+
+DOM order. It really is quite a lot like z-index so let's grab this aside and let's pick it up
+
+and move it to above the main. Of course when I do this we have this unfortunate side effect of
+
+now we've flipped the visual presentation but it does solve our problem right? If I tab through
+
+them it goes through them in exactly the order I want. So we can kind of flip the visual order
+
+back to what it was using flex direction. So I'm going to set it to row reverse and when I do that
+
+it has the effect of bringing us back to where we were at the beginning but preserving that
+
+modified tab order where it goes through the table of contents first. In some cases you may
+
+notice that the alignment shifts like things move to the right instead of the left but that
+
+only happens when you have available space and because our main element is set to grow
+
+there isn't any available space so we don't have to worry about that here.
